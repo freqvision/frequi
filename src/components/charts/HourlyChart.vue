@@ -9,11 +9,11 @@
 
 <script setup lang="ts">
 import ECharts from 'vue-echarts';
-import { useSettingsStore } from '@/stores/settings';
+import { useSettingsStore } from '@frequi/stores/settings';
 import { computed } from 'vue';
 
-import { Trade } from '@/types';
-import { timestampHour } from '@/shared/formatters';
+import { Trade } from '@frequi/types';
+import { timestampHour } from '@frequi/shared/formatters';
 import { EChartsOption } from 'echarts';
 
 import { use } from 'echarts/core';

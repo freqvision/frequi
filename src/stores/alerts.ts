@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { AlertSeverity, AlertType } from '@/types/alertTypes';
+import { AlertSeverity, AlertType } from '@frequi/types/alertTypes';
 
 export const useAlertsStore = defineStore('alerts', {
   state: () => {

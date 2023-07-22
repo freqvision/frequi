@@ -1,15 +1,16 @@
 <template>
   <div id="app" class="d-flex flex-column vh-100">
-    <NavBar />
+    <FNavBar />
     <BodyLayout class="flex-fill overflow-auto" />
     <NavFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import NavBar from '@/components/layout/NavBar.vue';
-import NavFooter from '@/components/layout/NavFooter.vue';
-import BodyLayout from '@/components/layout/BodyLayout.vue';
+import FNavBar from '@frequi/components/layout/FNavBar.vue';
+import NavBar from '@frequi/components/layout/NavBar.vue';
+import NavFooter from '@frequi/components/layout/NavFooter.vue';
+import BodyLayout from '@frequi/components/layout/BodyLayout.vue';
 import { setTimezone } from './shared/formatters';
 import { onMounted, watch } from 'vue';
 import { useSettingsStore } from './stores/settings';

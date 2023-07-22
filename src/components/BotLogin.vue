@@ -83,11 +83,11 @@
 </template>
 
 <script setup lang="ts">
-import { useUserService } from '@/shared/userService';
-import { AuthPayload, AuthStorageWithBotId } from '@/types';
+import { useUserService } from '@frequi/shared/userService';
+import { AuthPayload, AuthStorageWithBotId } from '@frequi/types';
 
 import { computed, ref } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 

@@ -41,7 +41,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { usePairlistConfigStore } from '@/stores/pairlistConfig';
+import { usePairlistConfigStore } from '@frequi/stores/pairlistConfig';
 import EditValue from '../general/EditValue.vue';
 const pairlistStore = usePairlistConfigStore();
 </script>

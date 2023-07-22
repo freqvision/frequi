@@ -1,176 +1,108 @@
 <template>
-  <grid-layout
-    class="h-100 w-100"
-    :row-height="50"
-    :layout="gridLayoutData"
-    :vertical-compact="false"
-    :margin="[5, 5]"
-    :responsive-layouts="responsiveGridLayouts"
-    :is-resizable="!isLayoutLocked"
-    :is-draggable="!isLayoutLocked"
-    :responsive="true"
-    :prevent-collision="true"
-    :cols="{ lg: 12, md: 12, sm: 12, xs: 4, xxs: 2 }"
-    :col-num="12"
-    @layout-updated="layoutUpdatedEvent"
-    @breakpoint-changed="breakpointChanged"
-  >
-    <template #default="{ gridItemProps }">
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutDaily.i"
-        :x="gridLayoutDaily.x"
-        :y="gridLayoutDaily.y"
-        :w="gridLayoutDaily.w"
-        :h="gridLayoutDaily.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer :header="`Daily Profit ${botStore.botCount > 1 ? 'combined' : ''}`">
+  <VRow>
+    <VCol cols="12" md="8">
+      <VCard title="Bot comparison" class="h-100">
+        <VCardText class="h-100">
+          <bot-comparison-list />
+        </VCardText>
+      </VCard>
+    </VCol>
+    <VCol cols="12" md="4">
+      <VCard :title="`Daily Profit ${botStore.botCount > 1 ? 'combined' : ''}`" class="h-100">
+        <VCardText class="h-100">
           <DailyChart
             v-if="botStore.allDailyStatsSelectedBots"
             :daily-stats="botStore.allDailyStatsSelectedBots"
             :show-title="false"
           />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutBotComparison.i"
-        :x="gridLayoutBotComparison.x"
-        :y="gridLayoutBotComparison.y"
-        :w="gridLayoutBotComparison.w"
-        :h="gridLayoutBotComparison.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer header="Bot comparison">
-          <bot-comparison-list />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutAllOpenTrades.i"
-        :x="gridLayoutAllOpenTrades.x"
-        :y="gridLayoutAllOpenTrades.y"
-        :w="gridLayoutAllOpenTrades.w"
-        :h="gridLayoutAllOpenTrades.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer>
-          <template #header>
-            <div class="d-flex justify-content-center">
-              Open Trades
-              <InfoBox
-                class="ms-2"
-                hint="Open trades of all selected bots. Click on a trade to go to the trade page for that trade/bot."
-              />
-            </div>
-          </template>
+        </VCardText>
+      </VCard>
+    </VCol>
+    <VCol cols="12" md="8">
+      <VCard class="h-100">
+        <VCardTitle>
+          <div class="d-flex justify-content-center">
+            Open Trades
+            <InfoBox
+              class="ms-2"
+              hint="Open trades of all selected bots. Click on a trade to go to the trade page for that trade/bot."
+            />
+          </div>
+        </VCardTitle>
+        <VCardText class="h-100">
           <trade-list active-trades :trades="botStore.allOpenTradesSelectedBots" multi-bot-view />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutCumChart.i"
-        :x="gridLayoutCumChart.x"
-        :y="gridLayoutCumChart.y"
-        :w="gridLayoutCumChart.w"
-        :h="gridLayoutCumChart.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer header="Cumulative Profit">
+        </VCardText>
+      </VCard>
+    </VCol>
+    <VCol cols="12" md="4">
+      <VCard title="Cumulative Profit" class="h-100">
+        <VCardText class="h-100">
           <CumProfitChart
             :trades="botStore.allTradesSelectedBots"
             :open-trades="botStore.allOpenTradesSelectedBots"
             :show-title="false"
           />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutAllClosedTrades.i"
-        :x="gridLayoutAllClosedTrades.x"
-        :y="gridLayoutAllClosedTrades.y"
-        :w="gridLayoutAllClosedTrades.w"
-        :h="gridLayoutAllClosedTrades.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer>
-          <template #header>
-            <div class="d-flex justify-content-center">
-              Closed Trades
-              <InfoBox
-                class="ms-2"
-                hint="Closed trades for all selected bots. Click on a trade to go to the trade page for that trade/bot."
-              />
-            </div>
-          </template>
+        </VCardText>
+      </VCard>
+    </VCol>
+    <VCol cols="12" md="8">
+      <VCard class="h-100">
+        <VCardTitle>
+          <div class="d-flex justify-content-center">
+            Closed Trades
+            <InfoBox
+              class="ms-2"
+              hint="Closed trades for all selected bots. Click on a trade to go to the trade page for that trade/bot."
+            />
+          </div>
+        </VCardTitle>
+        <VCardText class="h-100">
           <trade-list
             :active-trades="false"
             show-filter
             :trades="botStore.allClosedTradesSelectedBots"
             multi-bot-view
           />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutProfitDistribution.i"
-        :x="gridLayoutProfitDistribution.x"
-        :y="gridLayoutProfitDistribution.y"
-        :w="gridLayoutProfitDistribution.w"
-        :h="gridLayoutProfitDistribution.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer header="Profit Distribution">
+        </VCardText>
+      </VCard>
+    </VCol>
+    <VCol cols="12" md="4">
+      <VCard title="Profit Distribution" class="h-100">
+        <VCardText class="h-100">
           <ProfitDistributionChart :trades="botStore.allTradesSelectedBots" :show-title="false" />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-bind="gridItemProps"
-        :i="gridLayoutTradesLogChart.i"
-        :x="gridLayoutTradesLogChart.x"
-        :y="gridLayoutTradesLogChart.y"
-        :w="gridLayoutTradesLogChart.w"
-        :h="gridLayoutTradesLogChart.h"
-        :min-w="3"
-        :min-h="4"
-        drag-allow-from=".drag-header"
-      >
-        <DraggableContainer header="Trades Log">
-          <TradesLogChart :trades="botStore.allTradesSelectedBots" :show-title="false" />
-        </DraggableContainer>
-      </grid-item>
-    </template>
-  </grid-layout>
+        </VCardText>
+      </VCard>
+    </VCol>
+
+    <VCol cols="12">
+      <VCard title="Trades Log" class="h-100">
+        <VCardText class="h-100">
+          <TradesLogChart
+            style="height: 500px"
+            :trades="botStore.allTradesSelectedBots"
+            :show-title="false"
+          />
+        </VCardText>
+      </VCard>
+    </VCol>
+  </VRow>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 
-import DailyChart from '@/components/charts/DailyChart.vue';
-import CumProfitChart from '@/components/charts/CumProfitChart.vue';
-import TradesLogChart from '@/components/charts/TradesLog.vue';
-import ProfitDistributionChart from '@/components/charts/ProfitDistributionChart.vue';
-import BotComparisonList from '@/components/ftbot/BotComparisonList.vue';
-import TradeList from '@/components/ftbot/TradeList.vue';
-import DraggableContainer from '@/components/layout/DraggableContainer.vue';
-import InfoBox from '@/components/general/InfoBox.vue';
+import DailyChart from '@frequi/components/charts/DailyChart.vue';
+import CumProfitChart from '@frequi/components/charts/CumProfitChart.vue';
+import TradesLogChart from '@frequi/components/charts/TradesLog.vue';
+import ProfitDistributionChart from '@frequi/components/charts/ProfitDistributionChart.vue';
+import BotComparisonList from '@frequi/components/ftbot/BotComparisonList.vue';
+import TradeList from '@frequi/components/ftbot/TradeList.vue';
+import DraggableContainer from '@frequi/components/layout/DraggableContainer.vue';
+import InfoBox from '@frequi/components/general/InfoBox.vue';
 
-import { DashboardLayout, findGridLayout, useLayoutStore } from '@/stores/layout';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { GridItemData } from '@/types';
+import { DashboardLayout, findGridLayout, useLayoutStore } from '@frequi/stores/layout';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { GridItemData } from '@frequi/types';
 
 const botStore = useBotStore();
 

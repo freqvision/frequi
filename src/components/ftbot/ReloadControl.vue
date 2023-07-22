@@ -1,25 +1,25 @@
 <template>
   <div class="d-flex align-items-center ms-2">
-    <b-form-checkbox
+    <VCheckbox
       v-model="autoRefreshLoc"
       class="ms-auto float-end my-auto mt-1"
       title="AutoRefresh"
-    ></b-form-checkbox>
-    <b-button
+    ></VCheckbox>
+    <VBtn
       class="m-1"
-      variant="secondary"
-      size="sm"
+      color="secondary"
+      size="24"
       title="Auto Refresh All bots"
       @click="botStore.allRefreshFull"
     >
-      <i-mdi-refresh />
-    </b-button>
+      <VIcon>refresh</VIcon>
+    </VBtn>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const botStore = useBotStore();
 const autoRefreshLoc = computed({

@@ -1,30 +1,8 @@
 <template>
-  <grid-layout
-    class="h-100 w-100"
-    :row-height="50"
-    :layout="gridLayoutData"
-    :vertical-compact="false"
-    :margin="[5, 5]"
-    :responsive-layouts="responsiveGridLayouts"
-    :is-resizable="!isLayoutLocked"
-    :is-draggable="!isLayoutLocked"
-    :responsive="true"
-    :cols="{ lg: 12, md: 12, sm: 12, xs: 4, xxs: 2 }"
-    :col-num="12"
-    @update:breakpoint="breakpointChanged"
-  >
-    <template #default="{ gridItemProps }">
-      <grid-item
-        v-if="gridLayoutMultiPane.h != 0"
-        v-bind="gridItemProps"
-        :i="gridLayoutMultiPane.i"
-        :x="gridLayoutMultiPane.x"
-        :y="gridLayoutMultiPane.y"
-        :w="gridLayoutMultiPane.w"
-        :h="gridLayoutMultiPane.h"
-        drag-allow-from=".card-header"
-      >
-        <DraggableContainer header="Multi Pane">
+  <VRow>
+    <VCol v-if="gridLayoutMultiPane.h != 0" cols="12" md="3">
+      <VCard title="Multi Pane" class="h-100">
+        <VCardText class="h-100">
           <div class="mt-1 d-flex justify-content-center">
             <BotControls class="mt-1 mb-2" />
           </div>
@@ -56,114 +34,90 @@
               <PairLockList />
             </b-tab>
           </b-tabs>
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-if="gridLayoutOpenTrades.h != 0"
-        v-bind="gridItemProps"
-        :i="gridLayoutOpenTrades.i"
-        :x="gridLayoutOpenTrades.x"
-        :y="gridLayoutOpenTrades.y"
-        :w="gridLayoutOpenTrades.w"
-        :h="gridLayoutOpenTrades.h"
-        drag-allow-from=".card-header"
-      >
-        <DraggableContainer header="Open Trades">
-          <TradeList
-            class="open-trades"
-            :trades="botStore.activeBot.openTrades"
-            title="Open trades"
-            :active-trades="true"
-            empty-text="Currently no open trades."
-          />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-if="gridLayoutTradeHistory.h != 0"
-        v-bind="gridItemProps"
-        :i="gridLayoutTradeHistory.i"
-        :x="gridLayoutTradeHistory.x"
-        :y="gridLayoutTradeHistory.y"
-        :w="gridLayoutTradeHistory.w"
-        :h="gridLayoutTradeHistory.h"
-        drag-allow-from=".card-header"
-      >
-        <DraggableContainer header="Closed Trades">
-          <trade-list
-            class="trade-history"
-            :trades="botStore.activeBot.closedTrades"
-            title="Trade history"
-            :show-filter="true"
-            empty-text="No closed trades so far."
-          />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-if="
-          botStore.activeBot.detailTradeId &&
-          botStore.activeBot.tradeDetail &&
-          gridLayoutTradeDetail.h != 0
-        "
-        v-bind="gridItemProps"
-        :i="gridLayoutTradeDetail.i"
-        :x="gridLayoutTradeDetail.x"
-        :y="gridLayoutTradeDetail.y"
-        :w="gridLayoutTradeDetail.w"
-        :h="gridLayoutTradeDetail.h"
-        :min-h="4"
-        drag-allow-from=".card-header"
-      >
-        <DraggableContainer header="Trade Detail">
-          <TradeDetail
-            :trade="botStore.activeBot.tradeDetail"
-            :stake-currency="botStore.activeBot.stakeCurrency"
-          />
-        </DraggableContainer>
-      </grid-item>
-      <grid-item
-        v-if="gridLayoutTradeDetail.h != 0"
-        v-bind="gridItemProps"
-        :i="gridLayoutChartView.i"
-        :x="gridLayoutChartView.x"
-        :y="gridLayoutChartView.y"
-        :w="gridLayoutChartView.w"
-        :h="gridLayoutChartView.h"
-        :min-h="6"
-        drag-allow-from=".card-header"
-      >
-        <DraggableContainer header="Chart">
-          <CandleChartContainer
-            :available-pairs="botStore.activeBot.whitelist"
-            :historic-view="!!false"
-            :timeframe="botStore.activeBot.timeframe"
-            :trades="botStore.activeBot.allTrades"
-          >
-          </CandleChartContainer>
-        </DraggableContainer>
-      </grid-item>
-    </template>
-  </grid-layout>
+        </VCardText>
+      </VCard>
+    </VCol>
+    <VCol cols="12" md="9">
+      <VRow>
+        <VCol v-if="gridLayoutTradeDetail.h != 0" cols="12" style="min-height: 600px">
+          <VCard title="Chart" class="h-100">
+            <VCardText class="h-100">
+              <CandleChartContainer
+                :available-pairs="botStore.activeBot.whitelist"
+                :historic-view="!!false"
+                :timeframe="botStore.activeBot.timeframe"
+                :trades="botStore.activeBot.allTrades"
+              >
+              </CandleChartContainer>
+            </VCardText>
+          </VCard>
+        </VCol>
+        <VCol v-if="gridLayoutOpenTrades.h != 0" cols="12">
+          <VCard title="Open Trades">
+            <VCardText>
+              <TradeList
+                class="open-trades"
+                :trades="botStore.activeBot.openTrades"
+                title="Open trades"
+                :active-trades="true"
+                empty-text="Currently no open trades."
+              />
+            </VCardText>
+          </VCard>
+        </VCol>
+        <VCol
+          v-if="
+            botStore.activeBot.detailTradeId &&
+            botStore.activeBot.tradeDetail &&
+            gridLayoutTradeDetail.h != 0
+          "
+          cols="12"
+        >
+          <VCard title="Trade Detail">
+            <VCardText>
+              <TradeDetail
+                :trade="botStore.activeBot.tradeDetail"
+                :stake-currency="botStore.activeBot.stakeCurrency"
+              />
+            </VCardText>
+          </VCard>
+        </VCol>
+        <VCol v-if="gridLayoutTradeHistory.h != 0" cols="12">
+          <VCard title="Closed Trades">
+            <VCardText>
+              <trade-list
+                class="trade-history"
+                :trades="botStore.activeBot.closedTrades"
+                title="Trade history"
+                :show-filter="true"
+                empty-text="No closed trades so far."
+              />
+            </VCardText>
+          </VCard>
+        </VCol>
+      </VRow>
+    </VCol>
+  </VRow>
 </template>
 
 <script setup lang="ts">
-import { GridItemData } from '@/types';
+import { GridItemData } from '@frequi/types';
 
-import Balance from '@/components/ftbot/BotBalance.vue';
-import BotControls from '@/components/ftbot/BotControls.vue';
-import BotStatus from '@/components/ftbot/BotStatus.vue';
-import CandleChartContainer from '@/components/charts/CandleChartContainer.vue';
-import DailyStats from '@/components/ftbot/DailyStats.vue';
-import DraggableContainer from '@/components/layout/DraggableContainer.vue';
-import FTBotAPIPairList from '@/components/ftbot/FTBotAPIPairList.vue';
-import PairLockList from '@/components/ftbot/PairLockList.vue';
-import PairSummary from '@/components/ftbot/PairSummary.vue';
-import BotPerformance from '@/components/ftbot/BotPerformance.vue';
-import TradeDetail from '@/components/ftbot/TradeDetail.vue';
-import TradeList from '@/components/ftbot/TradeList.vue';
+import Balance from '@frequi/components/ftbot/BotBalance.vue';
+import BotControls from '@frequi/components/ftbot/BotControls.vue';
+import BotStatus from '@frequi/components/ftbot/BotStatus.vue';
+import CandleChartContainer from '@frequi/components/charts/CandleChartContainer.vue';
+import DailyStats from '@frequi/components/ftbot/DailyStats.vue';
+import FTBotAPIPairList from '@frequi/components/ftbot/FTBotAPIPairList.vue';
+import PairLockList from '@frequi/components/ftbot/PairLockList.vue';
+import PairSummary from '@frequi/components/ftbot/PairSummary.vue';
+import BotPerformance from '@frequi/components/ftbot/BotPerformance.vue';
+import TradeDetail from '@frequi/components/ftbot/TradeDetail.vue';
+import TradeList from '@frequi/components/ftbot/TradeList.vue';
 
 import { ref, computed } from 'vue';
-import { useLayoutStore, findGridLayout, TradeLayout } from '@/stores/layout';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useLayoutStore, findGridLayout, TradeLayout } from '@frequi/stores/layout';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const botStore = useBotStore();
 const layoutStore = useLayoutStore();

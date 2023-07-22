@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { formatPercent } from '@/shared/formatters';
-import { StrategyBacktestResult } from '@/types';
+import { formatPercent } from '@frequi/shared/formatters';
+import { StrategyBacktestResult } from '@frequi/types';
 
 defineProps({
   backtestHistory: {

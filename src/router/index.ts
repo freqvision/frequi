@@ -1,81 +1,81 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { initBots, useBotStore } from '@/stores/ftbotwrapper';
+import { initBots, useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/freqtrade',
     name: 'Home',
-    component: () => import('@/views/HomeView.vue'),
+    component: () => import('@frequi/views/HomeView.vue'),
     meta: {
       allowAnonymous: true,
     },
   },
   {
-    path: '/trade',
+    path: '/freqtrade/trade',
     name: 'Freqtrade Trading',
-    component: () => import('@/views/TradingView.vue'),
+    component: () => import('@frequi/views/TradingView.vue'),
   },
   {
-    path: '/graph',
+    path: '/freqtrade/graph',
     name: 'Freqtrade Graph',
-    component: () => import('@/views/ChartsView.vue'),
+    component: () => import('@frequi/views/ChartsView.vue'),
   },
   {
-    path: '/logs',
+    path: '/freqtrade/logs',
     name: 'Freqtrade Logs',
-    component: () => import('@/views/LogView.vue'),
+    component: () => import('@frequi/views/LogView.vue'),
   },
   {
-    path: '/backtest',
+    path: '/freqtrade/backtest',
     name: 'Freqtrade Backtest',
-    component: () => import('@/views/BacktestingView.vue'),
+    component: () => import('@frequi/views/BacktestingView.vue'),
   },
   {
-    path: '/dashboard',
+    path: '/freqtrade/dashboard',
     name: 'Freqtrade Dashboard',
-    component: () => import('@/views/DashboardView.vue'),
+    component: () => import('@frequi/views/DashboardView.vue'),
   },
   {
-    path: '/balance',
+    path: '/freqtrade/balance',
     name: 'Freqtrade Balance',
-    component: () => import('@/components/ftbot/BotBalance.vue'),
+    component: () => import('@frequi/components/ftbot/BotBalance.vue'),
   },
   {
-    path: '/open_trades',
-    component: () => import('@/views/TradesList.vue'),
+    path: '/freqtrade/open_trades',
+    component: () => import('@frequi/views/TradesList.vue'),
   },
 
   {
-    path: '/trade_history',
-    component: () => import('@/views/TradesList.vue'),
+    path: '/freqtrade/trade_history',
+    component: () => import('@frequi/views/TradesList.vue'),
     props: { history: true },
   },
   {
-    path: '/pairlist',
-    component: () => import('@/components/ftbot/FTBotAPIPairList.vue'),
+    path: '/freqtrade/pairlist',
+    component: () => import('@frequi/components/ftbot/FTBotAPIPairList.vue'),
   },
   {
-    path: '/settings',
+    path: '/freqtrade/settings',
     name: 'Freqtrade Settings',
-    component: () => import('@/views/SettingsView.vue'),
+    component: () => import('@frequi/views/SettingsView.vue'),
   },
   {
-    path: '/login',
+    path: '/freqtrade/login',
     name: 'Login',
-    component: () => import('@/views/LoginView.vue'),
+    component: () => import('@frequi/views/LoginView.vue'),
     meta: {
       allowAnonymous: true,
     },
   },
   {
-    path: '/pairlist_config',
+    path: '/freqtrade/pairlist_config',
     name: 'Pairlist Configuration',
-    component: () => import('@/views/PairlistConfigView.vue'),
+    component: () => import('@frequi/views/PairlistConfigView.vue'),
   },
   {
     path: '/(.*)*',
     name: '404',
-    component: () => import('@/views/Error404View.vue'),
+    component: () => import('@frequi/views/Error404View.vue'),
   },
 ];
 
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
   if (!to.meta?.allowAnonymous && !botStore.hasBots) {
     // Forward to login if login is required
     next({
-      path: '/login',
+      path: '/freqtrade/login',
       query: { redirect: to.fullPath },
     });
   } else {

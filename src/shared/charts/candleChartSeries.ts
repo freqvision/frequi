@@ -1,4 +1,4 @@
-import { ChartType, IndicatorConfig } from '@/types';
+import { ChartType, IndicatorConfig } from '@frequi/types';
 import { BarSeriesOption, LineSeriesOption, ScatterSeriesOption } from 'echarts';
 import randomColor from '../randomColor';
 

@@ -1,4 +1,4 @@
-import { UserService } from '@/shared/userService';
+import { UserService } from '@frequi/shared/userService';
 import {
   BalanceInterface,
   BotDescriptor,
@@ -14,7 +14,7 @@ import {
   MultiReloadTradePayload,
   ProfitInterface,
   Trade,
-} from '@/types';
+} from '@frequi/types';
 import { defineStore } from 'pinia';
 import { createBotSubStore } from './ftbot';
 const AUTH_SELECTED_BOT = 'ftSelectedBot';

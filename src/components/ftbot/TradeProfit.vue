@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import { formatPercent, timestampms } from '@/shared/formatters';
-import { Trade } from '@/types';
-import ProfitPill from '@/components/general/ProfitPill.vue';
+import { formatPercent, timestampms } from '@frequi/shared/formatters';
+import { Trade } from '@frequi/types';
+import ProfitPill from '@frequi/components/general/ProfitPill.vue';
 
 import { computed, PropType } from 'vue';
 

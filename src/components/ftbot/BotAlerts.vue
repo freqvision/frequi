@@ -13,6 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAlertsStore } from '@/stores/alerts';
+import { useAlertsStore } from '@frequi/stores/alerts';
 const alertStore = useAlertsStore();
 </script>

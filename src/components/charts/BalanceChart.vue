@@ -22,10 +22,10 @@ import {
   TooltipComponent,
 } from 'echarts/components';
 
-import { BalanceValues } from '@/types';
-import { formatPriceCurrency } from '@/shared/formatters';
+import { BalanceValues } from '@frequi/types';
+import { formatPriceCurrency } from '@frequi/shared/formatters';
 import { computed } from 'vue';
-import { useSettingsStore } from '@/stores/settings';
+import { useSettingsStore } from '@frequi/stores/settings';
 
 use([
   PieChart,

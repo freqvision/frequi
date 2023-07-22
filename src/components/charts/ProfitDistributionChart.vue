@@ -40,9 +40,9 @@ import {
   TooltipComponent,
 } from 'echarts/components';
 
-import { ClosedTrade } from '@/types';
-import { binData } from '@/shared/charts/binCount';
-import { useSettingsStore } from '@/stores/settings';
+import { ClosedTrade } from '@frequi/types';
+import { binData } from '@frequi/shared/charts/binCount';
+import { useSettingsStore } from '@frequi/stores/settings';
 
 use([
   BarChart,

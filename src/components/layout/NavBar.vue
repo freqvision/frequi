@@ -2,7 +2,7 @@
   <header>
     <b-navbar toggleable="sm" dark variant="primary">
       <router-link class="navbar-brand" exact to="/">
-        <img class="logo" src="@/assets/freqtrade-logo.png" alt="Home Logo" />
+        <img class="logo" src="@frequi/assets/freqtrade-logo.png" alt="Home Logo" />
         <span class="navbar-brand-title d-sm-none d-md-inline">Freqtrade UI</span>
       </router-link>
 
@@ -132,16 +132,16 @@
 </template>
 
 <script setup lang="ts">
-import LoginModal from '@/views/LoginModal.vue';
-import ThemeSelect from '@/components/ThemeSelect.vue';
+import LoginModal from '@frequi/views/LoginModal.vue';
+import ThemeSelect from '@frequi/components/ThemeSelect.vue';
 import Favico from 'favico.js';
-import ReloadControl from '@/components/ftbot/ReloadControl.vue';
-import BotEntry from '@/components/BotEntry.vue';
-import BotList from '@/components/BotList.vue';
+import ReloadControl from '@frequi/components/ftbot/ReloadControl.vue';
+import BotEntry from '@frequi/components/BotEntry.vue';
+import BotList from '@frequi/components/BotList.vue';
 import { ref, onBeforeUnmount, onMounted, watch } from 'vue';
-import { OpenTradeVizOptions, useSettingsStore } from '@/stores/settings';
-import { useLayoutStore } from '@/stores/layout';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { OpenTradeVizOptions, useSettingsStore } from '@frequi/stores/settings';
+import { useLayoutStore } from '@frequi/stores/layout';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { useRoute } from 'vue-router';
 
 const botStore = useBotStore();

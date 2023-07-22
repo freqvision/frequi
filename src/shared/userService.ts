@@ -7,7 +7,7 @@ import {
   AuthStorage,
   AuthStorageMulti,
   BotDescriptor,
-} from '@/types';
+} from '@frequi/types';
 
 const AUTH_LOGIN_INFO = 'ftAuthLoginInfo';
 const APIBASE = '/api/v1';

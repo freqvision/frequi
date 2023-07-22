@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { Trade } from '@/types';
-import DateTimeTZ from '@/components/general/DateTimeTZ.vue';
+import { Trade } from '@frequi/types';
+import DateTimeTZ from '@frequi/components/general/DateTimeTZ.vue';
 import TradeProfit from './TradeProfit.vue';
 
 defineProps({
@@ -41,7 +41,7 @@ defineProps({
   padding: 0 0.2em;
 }
 .table-sm {
-  font-size: $fontsize-small;
+  font-size: 0.75rem;
 }
 .btn-xs {
   padding: 0.1rem 0.25rem;

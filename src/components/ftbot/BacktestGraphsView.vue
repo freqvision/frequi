@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ClosedTrade } from '@/types';
-import ProfitDistributionChart from '@/components/charts/ProfitDistributionChart.vue';
-import CumProfitChart from '@/components/charts/CumProfitChart.vue';
-import TradesLogChart from '@/components/charts/TradesLog.vue';
+import { ClosedTrade } from '@frequi/types';
+import ProfitDistributionChart from '@frequi/components/charts/ProfitDistributionChart.vue';
+import CumProfitChart from '@frequi/components/charts/CumProfitChart.vue';
+import TradesLogChart from '@frequi/components/charts/TradesLog.vue';
 
 defineProps({
   trades: { required: true, type: Array as () => ClosedTrade[] },

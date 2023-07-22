@@ -69,8 +69,8 @@
 </template>
 
 <script setup lang="ts">
-import TradeList from '@/components/ftbot/TradeList.vue';
-import { StrategyBacktestResult, Trade } from '@/types';
+import TradeList from '@frequi/components/ftbot/TradeList.vue';
+import { StrategyBacktestResult, Trade } from '@frequi/types';
 import BacktestResultPeriodBreakdown from './BacktestResultPeriodBreakdown.vue';
 
 import { computed } from 'vue';
@@ -80,7 +80,7 @@ import {
   formatPrice,
   humanizeDurationFromSeconds,
   isNotUndefined,
-} from '@/shared/formatters';
+} from '@frequi/shared/formatters';
 import { TableField, TableItem } from 'bootstrap-vue-next';
 
 const props = defineProps({

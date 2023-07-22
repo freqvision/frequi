@@ -1,5 +1,5 @@
-import { useApi } from '@/shared/apiService';
-import { useUserService } from '@/shared/userService';
+import { useApi } from '@frequi/shared/apiService';
+import { useUserService } from '@frequi/shared/userService';
 import {
   BotState,
   Trade,
@@ -43,13 +43,13 @@ import {
   PairlistEvalResponse,
   PairlistsPayload,
   PairlistsResponse,
-} from '@/types';
+} from '@frequi/types';
 import axios, { AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
 import { showAlert } from './alerts';
 import { useWebSocket } from '@vueuse/core';
-import { FTWsMessage, FtWsMessageTypes } from '@/types/wsMessageTypes';
-import { showNotification } from '@/shared/notifications';
+import { FTWsMessage, FtWsMessageTypes } from '@frequi/types/wsMessageTypes';
+import { showNotification } from '@frequi/shared/notifications';
 
 export function createBotSubStore(botId: string, botName: string) {
   const userService = useUserService(botId);

@@ -55,9 +55,9 @@
 </template>
 
 <script setup lang="ts">
-import PairlistConfigParameter from '@/components/ftbot/PairlistConfigParameter.vue';
-import { usePairlistConfigStore } from '@/stores/pairlistConfig';
-import { Pairlist } from '@/types';
+import PairlistConfigParameter from '@frequi/components/ftbot/PairlistConfigParameter.vue';
+import { usePairlistConfigStore } from '@frequi/stores/pairlistConfig';
+import { Pairlist } from '@frequi/types';
 import { computed } from 'vue';
 
 const pairlistStore = usePairlistConfigStore();

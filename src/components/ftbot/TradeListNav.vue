@@ -36,12 +36,12 @@
 </template>
 
 <script setup lang="ts">
-import { Trade } from '@/types';
-import TradeProfit from '@/components/ftbot/TradeProfit.vue';
-import ProfitPill from '@/components/general/ProfitPill.vue';
+import { Trade } from '@frequi/types';
+import TradeProfit from '@frequi/components/ftbot/TradeProfit.vue';
+import ProfitPill from '@frequi/components/general/ProfitPill.vue';
 import { computed, ref } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import DateTimeTZ from '@/components/general/DateTimeTZ.vue';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import DateTimeTZ from '@frequi/components/general/DateTimeTZ.vue';
 
 const props = defineProps({
   trades: { required: true, type: Array as () => Trade[] },

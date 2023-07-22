@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Trade } from '@/types';
+import { Trade } from '@frequi/types';
 import { ref } from 'vue';
 import TradeActions from './TradeActions.vue';
 
@@ -33,6 +33,11 @@ function handleReloadTrade(item: Trade) {
   popoverOpen.value = false;
   emit('reloadTrade', item);
 }
+
+function deleteTradeHandler(item: Trade) {
+  popoverOpen.value = false;
+  emit('deleteTrade', item);
+}
 </script>
 
 <template>
@@ -58,10 +63,7 @@ function handleReloadTrade(item: Trade) {
         :bot-api-version="botApiVersion"
         @force-exit="forceExitHandler"
         @force-exit-partial="forceExitPartialHandler"
-        @delete-trade="
-          popoverOpen = false;
-          $emit('deleteTrade', trade);
-        "
+        @delete-trade="deleteTradeHandler"
         @cancel-open-order="cancelOpenOrderHandler"
         @reload-trade="handleReloadTrade"
       />

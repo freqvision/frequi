@@ -26,12 +26,12 @@
 </template>
 
 <script setup lang="ts">
-import { formatPercent, timestampms } from '@/shared/formatters';
-import { Lock, Trade } from '@/types';
-import TradeProfit from '@/components/ftbot/TradeProfit.vue';
-import ProfitPill from '@/components/general/ProfitPill.vue';
+import { formatPercent, timestampms } from '@frequi/shared/formatters';
+import { Lock, Trade } from '@frequi/types';
+import TradeProfit from '@frequi/components/ftbot/TradeProfit.vue';
+import ProfitPill from '@frequi/components/general/ProfitPill.vue';
 import { computed } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 interface CombinedPairList {
   pair: string;

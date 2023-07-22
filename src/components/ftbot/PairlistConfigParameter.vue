@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { PairlistParameter, PairlistParamType } from '@/types';
+import { PairlistParameter, PairlistParamType } from '@frequi/types';
 
 defineProps<{
   param: PairlistParameter;

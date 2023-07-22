@@ -30,8 +30,8 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { timestampms } from '@/shared/formatters';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { timestampms } from '@frequi/shared/formatters';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const botStore = useBotStore();
 

@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { formatPercent, formatPrice, formatPriceCurrency } from '@/shared/formatters';
+import { formatPercent, formatPrice, formatPriceCurrency } from '@frequi/shared/formatters';
 
-import ProfitSymbol from '@/components/general/ProfitSymbol.vue';
+import ProfitSymbol from '@frequi/components/general/ProfitSymbol.vue';
 
 import { computed } from 'vue';
 
@@ -55,10 +55,10 @@ const profitString = computed((): string => {
 
 <style scoped lang="scss">
 .profit-pill {
-  border: 2px solid $color-loss;
+  border: 2px solid rgba(var(--v-theme-error), 1);
   border-radius: 6px;
 }
 .profit-pill-profit {
-  border: 2px solid $color-profit;
+  border: 2px solid rgba(var(--v-theme-success), 1);
 }
 </style>

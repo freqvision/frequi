@@ -11,10 +11,10 @@ import {
   PairlistPayloadItem,
   PairlistsPayload,
   TradingMode,
-} from '@/types';
+} from '@frequi/types';
 import { computed, ref, toRaw, watch } from 'vue';
 import { showAlert } from './alerts';
-import { isNotUndefined } from '@/shared/formatters';
+import { isNotUndefined } from '@frequi/shared/formatters';
 
 export const usePairlistConfigStore = defineStore(
   'pairlistConfig',

@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import Login from '@/components/BotLogin.vue';
-import { AuthStorageWithBotId } from '@/types';
+import Login from '@frequi/components/BotLogin.vue';
+import { AuthStorageWithBotId } from '@frequi/types';
 import { nextTick, ref } from 'vue';
 
 defineProps({

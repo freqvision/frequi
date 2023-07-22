@@ -129,11 +129,16 @@
 </template>
 
 <script setup lang="ts">
-import { formatPercent, formatPriceCurrency, formatPrice, timestampms } from '@/shared/formatters';
-import ValuePair from '@/components/general/ValuePair.vue';
-import TradeProfit from '@/components/ftbot/TradeProfit.vue';
-import DateTimeTZ from '@/components/general/DateTimeTZ.vue';
-import { Trade } from '@/types';
+import {
+  formatPercent,
+  formatPriceCurrency,
+  formatPrice,
+  timestampms,
+} from '@frequi/shared/formatters';
+import ValuePair from '@frequi/components/general/ValuePair.vue';
+import TradeProfit from '@frequi/components/ftbot/TradeProfit.vue';
+import DateTimeTZ from '@frequi/components/general/DateTimeTZ.vue';
+import { Trade } from '@frequi/types';
 
 defineProps({
   trade: { required: true, type: Object as () => Trade },

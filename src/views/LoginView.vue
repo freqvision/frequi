@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import BotLogin from '@/components/BotLogin.vue';
+import BotLogin from '@frequi/components/BotLogin.vue';
 </script>
 
 <style scoped>

@@ -24,11 +24,11 @@ import {
   VisualMapPiecewiseComponent,
 } from 'echarts/components';
 
-import { ClosedTrade } from '@/types';
-import { useSettingsStore } from '@/stores/settings';
+import { ClosedTrade } from '@frequi/types';
+import { useSettingsStore } from '@frequi/stores/settings';
 import { computed } from 'vue';
-import { timestampms } from '@/shared/formatters';
-import { dataZoomPartial } from '@/shared/charts/chartZoom';
+import { timestampms } from '@frequi/shared/formatters';
+import { dataZoomPartial } from '@frequi/shared/charts/chartZoom';
 
 use([
   BarChart,

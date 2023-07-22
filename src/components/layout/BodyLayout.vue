@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import BotAlerts from '@/components/ftbot/BotAlerts.vue';
+import BotAlerts from '@frequi/components/ftbot/BotAlerts.vue';
 </script>
 <style lang="scss" scoped>
 .container-main {

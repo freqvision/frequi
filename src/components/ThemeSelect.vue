@@ -1,11 +1,11 @@
 <template>
-  <b-link class="nav-link" @click="toggleNight">
-    <i-mdi-brightness-6 />
-  </b-link>
+  <VBtn class="nav-link" icon @click="toggleNight">
+    <VIcon :icon="themeIcon" size="24" />
+  </VBtn>
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from '@/stores/settings';
+import { useSettingsStore } from '@frequi/stores/settings';
 import { useColorMode } from 'bootstrap-vue-next';
 import { onMounted, ref } from 'vue';
 
@@ -13,6 +13,8 @@ const mode = useColorMode();
 
 const activeTheme = ref('');
 const settingsStore = useSettingsStore();
+const emit = defineEmits(['change']);
+const themeIcon = ref('');
 
 const setTheme = (themeName: string) => {
   // If theme is already active, do nothing.
@@ -33,6 +35,9 @@ const setTheme = (themeName: string) => {
   // Save the theme as localstorage
   settingsStore.currentTheme = themeName;
   activeTheme.value = themeName;
+  const theme = themeName.toLowerCase() === 'bootstrap' ? 'light' : 'dark';
+  themeIcon.value = theme === 'light' ? 'dark_mode' : 'light_mode';
+  emit('change', theme);
 };
 
 onMounted(() => {

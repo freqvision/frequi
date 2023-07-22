@@ -323,22 +323,22 @@
 </template>
 
 <script setup lang="ts">
-import TimeRangeSelect from '@/components/ftbot/TimeRangeSelect.vue';
-import BacktestResultView from '@/components/ftbot/BacktestResultView.vue';
-import BacktestResultSelect from '@/components/ftbot/BacktestResultSelect.vue';
-import StrategySelect from '@/components/ftbot/StrategySelect.vue';
-import FreqaiModelSelect from '@/components/ftbot/FreqaiModelSelect.vue';
-import TimeframeSelect from '@/components/ftbot/TimeframeSelect.vue';
-import BacktestHistoryLoad from '@/components/ftbot/BacktestHistoryLoad.vue';
-import BacktestGraphsView from '@/components/ftbot/BacktestGraphsView.vue';
-import BacktestResultChart from '@/components/ftbot/BacktestResultChart.vue';
-import InfoBox from '@/components/general/InfoBox.vue';
+import TimeRangeSelect from '@frequi/components/ftbot/TimeRangeSelect.vue';
+import BacktestResultView from '@frequi/components/ftbot/BacktestResultView.vue';
+import BacktestResultSelect from '@frequi/components/ftbot/BacktestResultSelect.vue';
+import StrategySelect from '@frequi/components/ftbot/StrategySelect.vue';
+import FreqaiModelSelect from '@frequi/components/ftbot/FreqaiModelSelect.vue';
+import TimeframeSelect from '@frequi/components/ftbot/TimeframeSelect.vue';
+import BacktestHistoryLoad from '@frequi/components/ftbot/BacktestHistoryLoad.vue';
+import BacktestGraphsView from '@frequi/components/ftbot/BacktestGraphsView.vue';
+import BacktestResultChart from '@frequi/components/ftbot/BacktestResultChart.vue';
+import InfoBox from '@frequi/components/general/InfoBox.vue';
 
-import { BacktestPayload } from '@/types';
+import { BacktestPayload } from '@frequi/types';
 
-import { formatPercent } from '@/shared/formatters';
+import { formatPercent } from '@frequi/shared/formatters';
 import { computed, ref, onMounted, watch } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const botStore = useBotStore();
 

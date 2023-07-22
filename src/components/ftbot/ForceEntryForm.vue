@@ -118,8 +118,8 @@
 </template>
 
 <script setup lang="ts">
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { ForceEnterPayload, OrderSides } from '@/types';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { ForceEnterPayload, OrderSides } from '@frequi/types';
 
 import { computed, nextTick, ref } from 'vue';
 

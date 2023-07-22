@@ -53,11 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import ProfitPill from '@/components/general/ProfitPill.vue';
-import { formatPrice } from '@/shared/formatters';
+import ProfitPill from '@frequi/components/general/ProfitPill.vue';
+import { formatPrice } from '@frequi/shared/formatters';
 import { computed } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { ProfitInterface, ComparisonTableItems } from '@/types';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { ProfitInterface, ComparisonTableItems } from '@frequi/types';
 import { TableField, TableItem } from 'bootstrap-vue-next';
 
 const botStore = useBotStore();

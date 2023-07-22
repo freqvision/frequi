@@ -1,5 +1,5 @@
-import { deepClone } from '@/shared/deepClone';
-import { EMPTY_PLOTCONFIG, PlotConfig, PlotConfigStorage } from '@/types';
+import { deepClone } from '@frequi/shared/deepClone';
+import { EMPTY_PLOTCONFIG, PlotConfig, PlotConfigStorage } from '@frequi/types';
 import { defineStore } from 'pinia';
 
 const FT_PLOT_CONFIG_KEY = 'ftPlotConfig';

@@ -1,6 +1,6 @@
 <template>
   <div v-if="botStore.botCount > 0">
-    <h3 v-if="!small">Available bots</h3>
+    <h5 v-if="!small">Available bots</h5>
     <b-list-group ref="sortContainer">
       <b-list-group-item
         v-for="bot in botListComp"
@@ -35,12 +35,12 @@
 </template>
 
 <script setup lang="ts">
-import BotEntry from '@/components/BotEntry.vue';
-import BotRename from '@/components/BotRename.vue';
-import LoginModal from '@/views/LoginModal.vue';
+import BotEntry from '@frequi/components/BotEntry.vue';
+import BotRename from '@frequi/components/BotRename.vue';
+import LoginModal from '@frequi/views/LoginModal.vue';
 
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { AuthStorageWithBotId, BotDescriptor } from '@/types';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { AuthStorageWithBotId, BotDescriptor } from '@frequi/types';
 import { useSortable } from '@vueuse/integrations/useSortable';
 import { computed, ref } from 'vue';
 

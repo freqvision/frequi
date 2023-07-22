@@ -90,15 +90,15 @@
 
 <script setup lang="ts">
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { formatPercent, formatPrice } from '@/shared/formatters';
-import { MultiDeletePayload, MultiForcesellPayload, Trade } from '@/types';
-import DateTimeTZ from '@/components/general/DateTimeTZ.vue';
+import { formatPercent, formatPrice } from '@frequi/shared/formatters';
+import { MultiDeletePayload, MultiForcesellPayload, Trade } from '@frequi/types';
+import DateTimeTZ from '@frequi/components/general/DateTimeTZ.vue';
 import TradeProfit from './TradeProfit.vue';
 import TradeActionsPopover from './TradeActionsPopover.vue';
-import ForceExitForm from '@/components/ftbot/ForceExitForm.vue';
+import ForceExitForm from '@frequi/components/ftbot/ForceExitForm.vue';
 
 import { ref, computed, watch } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { useRouter } from 'vue-router';
 import { TableField, TableItem } from 'bootstrap-vue-next';
 
@@ -302,7 +302,7 @@ watch(
   padding: 0 0.2em;
 }
 .table-sm {
-  font-size: $fontsize-small;
+  font-size: 0.75rem;
 }
 .btn-xs {
   padding: 0.1rem 0.25rem;

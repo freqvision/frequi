@@ -1,6 +1,6 @@
-import { showAlert } from '@/stores/alerts';
-import { useSettingsStore } from '@/stores/settings';
-import { FTWsMessage, FtWsMessageTypes } from '@/types/wsMessageTypes';
+import { showAlert } from '@frequi/stores/alerts';
+import { useSettingsStore } from '@frequi/stores/settings';
+import { FTWsMessage, FtWsMessageTypes } from '@frequi/types/wsMessageTypes';
 
 export function showNotification(msg: FTWsMessage, botname: string) {
   const settingsStore = useSettingsStore();

@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex h-100 p-0 align-items-start">
-    <textarea v-model="formattedLogs" class="h-100" readonly></textarea>
+    <!--    <textarea v-model="formattedLogs" class="h-100" readonly></textarea>-->
+    <VTextarea v-model="formattedLogs" class="log-viewer" rows="25" readonly></VTextarea>
     <b-button id="refresh-logs" size="sm" @click="botStore.activeBot.getLogs">
       <i-mdi-refresh />
     </b-button>
@@ -8,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { onMounted, computed } from 'vue';
 
 const botStore = useBotStore();
@@ -32,6 +33,6 @@ textarea {
   width: 100%;
   min-height: 6em;
   resize: none;
-  font-size: $fontsize-small;
+  font-size: 0.75rem;
 }
 </style>

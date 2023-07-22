@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import InfoBox from '@/components/general/InfoBox.vue';
+import InfoBox from '@frequi/components/general/InfoBox.vue';
 
 defineProps({
   description: { type: String, required: true },

@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import PairlistConfigurator from '@/components/ftbot/PairlistConfigurator.vue';
+import PairlistConfigurator from '@frequi/components/ftbot/PairlistConfigurator.vue';
 </script>

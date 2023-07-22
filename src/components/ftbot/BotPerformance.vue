@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { formatPrice } from '@/shared/formatters';
+import { formatPrice } from '@frequi/shared/formatters';
 import { computed } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { TableField } from 'bootstrap-vue-next';
 
 const botStore = useBotStore();

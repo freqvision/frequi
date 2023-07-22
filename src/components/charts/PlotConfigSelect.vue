@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import EditValue from '@/components/general/EditValue.vue';
-import { usePlotConfigStore } from '@/stores/plotConfig';
+import EditValue from '@frequi/components/general/EditValue.vue';
+import { usePlotConfigStore } from '@frequi/stores/plotConfig';
 
 defineProps({
   allowEdit: {

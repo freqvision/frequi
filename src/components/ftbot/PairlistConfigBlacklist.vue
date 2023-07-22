@@ -50,7 +50,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { usePairlistConfigStore } from '@/stores/pairlistConfig';
+import { usePairlistConfigStore } from '@frequi/stores/pairlistConfig';
 const pairlistStore = usePairlistConfigStore();
 const copyFromConfig = ref('');
 const visible = ref(false);

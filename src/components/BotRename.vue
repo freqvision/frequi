@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { BotDescriptor } from '@/types';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { BotDescriptor } from '@frequi/types';
 import { ref } from 'vue';
 
 const props = defineProps({

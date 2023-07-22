@@ -21,9 +21,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import DailyChart from '@/components/charts/DailyChart.vue';
-import { formatPercent } from '@/shared/formatters';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import DailyChart from '@frequi/components/charts/DailyChart.vue';
+import { formatPercent } from '@frequi/shared/formatters';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { TableField } from 'bootstrap-vue-next';
 
 const botStore = useBotStore();

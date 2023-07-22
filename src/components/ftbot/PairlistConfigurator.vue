@@ -92,14 +92,14 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { usePairlistConfigStore } from '@/stores/pairlistConfig';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { usePairlistConfigStore } from '@frequi/stores/pairlistConfig';
 import PairlistConfigItem from './PairlistConfigItem.vue';
 import PairlistConfigBlacklist from './PairlistConfigBlacklist.vue';
 import PairlistConfigActions from './PairlistConfigActions.vue';
-import { Pairlist } from '@/types';
+import { Pairlist } from '@frequi/types';
 import { useSortable, moveArrayElement } from '@vueuse/integrations/useSortable';
-import CopyableTextfield from '@/components/general/CopyableTextfield.vue';
+import CopyableTextfield from '@frequi/components/general/CopyableTextfield.vue';
 import ExchangeSelect from './ExchangeSelect.vue';
 
 const botStore = useBotStore();

@@ -24,8 +24,8 @@ import {
   VisualMapComponent,
 } from 'echarts/components';
 
-import { DailyReturnValue } from '@/types';
-import { useSettingsStore } from '@/stores/settings';
+import { DailyReturnValue } from '@frequi/types';
+import { useSettingsStore } from '@frequi/stores/settings';
 import { EChartsOption } from 'echarts';
 
 use([

@@ -51,10 +51,7 @@
         size="sm"
         class="ms-1 col"
         :disabled="addNewIndicator"
-        @click="
-          addNewIndicator = !addNewIndicator;
-          selIndicatorName = '';
-        "
+        @click="onAddNewIndicator"
       >
         Add new indicator
       </b-button>
@@ -156,18 +153,18 @@
 </template>
 
 <script setup lang="ts">
-import EditValue from '@/components/general/EditValue.vue';
-import PlotConfigSelect from '@/components/charts/PlotConfigSelect.vue';
-import PlotIndicator from '@/components/charts/PlotIndicator.vue';
-import { showAlert } from '@/stores/alerts';
-import { IndicatorConfig, PlotConfig } from '@/types';
+import EditValue from '@frequi/components/general/EditValue.vue';
+import PlotConfigSelect from '@frequi/components/charts/PlotConfigSelect.vue';
+import PlotIndicator from '@frequi/components/charts/PlotIndicator.vue';
+import { showAlert } from '@frequi/stores/alerts';
+import { IndicatorConfig, PlotConfig } from '@frequi/types';
 import PlotIndicatorSelect from './PlotIndicatorSelect.vue';
 
-import { deepClone } from '@/shared/deepClone';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { usePlotConfigStore } from '@/stores/plotConfig';
+import { deepClone } from '@frequi/shared/deepClone';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { usePlotConfigStore } from '@frequi/stores/plotConfig';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import randomColor from '@/shared/randomColor';
+import randomColor from '@frequi/shared/randomColor';
 
 defineProps({
   columns: { required: true, type: Array as () => string[] },
@@ -345,6 +342,11 @@ function addNewIndicatorSelected(indicator?: string) {
     });
     selIndicatorName.value = indicator;
   }
+}
+
+function onAddNewIndicator() {
+  addNewIndicator.value = !addNewIndicator.value;
+  selIndicatorName.value = '';
 }
 
 watch(selSubPlot, () => {

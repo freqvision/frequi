@@ -1,6 +1,6 @@
-import { formatPercent, formatPriceCurrency } from '@/shared/formatters';
-import { roundTimeframe } from '@/shared/timemath';
-import { Order, PairHistory, Trade, BTOrder } from '@/types';
+import { formatPercent, formatPriceCurrency } from '@frequi/shared/formatters';
+import { roundTimeframe } from '@frequi/shared/timemath';
+import { Order, PairHistory, Trade, BTOrder } from '@frequi/types';
 import { ScatterSeriesOption } from 'echarts';
 
 function buildTooltipCost(trade: Trade, order: Order | BTOrder): string {

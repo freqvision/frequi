@@ -42,9 +42,9 @@
 </template>
 
 <script setup lang="ts">
-import { ChartType, IndicatorConfig } from '@/types';
-import randomColor from '@/shared/randomColor';
-import PlotIndicatorSelect from '@/components/charts/PlotIndicatorSelect.vue';
+import { ChartType, IndicatorConfig } from '@frequi/types';
+import randomColor from '@frequi/shared/randomColor';
+import PlotIndicatorSelect from '@frequi/components/charts/PlotIndicatorSelect.vue';
 import { computed, ref, watch } from 'vue';
 import { watchDebounced } from '@vueuse/core';
 

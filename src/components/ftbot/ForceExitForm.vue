@@ -59,8 +59,8 @@
 </template>
 
 <script setup lang="ts">
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { ForceSellPayload, Trade } from '@/types';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { ForceSellPayload, Trade } from '@frequi/types';
 
 import { ref, computed } from 'vue';
 

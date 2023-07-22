@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { Trade } from '@/types';
+import { Trade } from '@frequi/types';
 
 defineProps({
   botApiVersion: {

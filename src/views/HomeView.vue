@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import BotList from '@/components/BotList.vue';
+import BotList from '@frequi/components/BotList.vue';
 </script>
 
 <style lang="scss" scoped>

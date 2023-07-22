@@ -34,10 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import { Trade } from '@/types';
-import CustomTradeListEntry from '@/components/ftbot/CustomTradeListEntry.vue';
+import { Trade } from '@frequi/types';
+import CustomTradeListEntry from '@frequi/components/ftbot/CustomTradeListEntry.vue';
 import { computed, ref } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const props = defineProps({
   trades: { required: true, type: Array as () => Trade[] },

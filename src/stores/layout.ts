@@ -1,4 +1,4 @@
-import { GridItemData } from '@/types';
+import { GridItemData } from '@frequi/types';
 import { defineStore } from 'pinia';
 
 export enum TradeLayout {

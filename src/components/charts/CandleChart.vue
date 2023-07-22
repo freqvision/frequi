@@ -5,9 +5,12 @@
 </template>
 
 <script setup lang="ts">
-import { generateAreaCandleSeries, generateCandleSeries } from '@/shared/charts/candleChartSeries';
-import heikinashi from '@/shared/charts/heikinashi';
-import { generateTradeSeries } from '@/shared/charts/tradeChartData';
+import {
+  generateAreaCandleSeries,
+  generateCandleSeries,
+} from '@frequi/shared/charts/candleChartSeries';
+import heikinashi from '@frequi/shared/charts/heikinashi';
+import { getTradeEntries } from '@frequi/shared/charts/tradeChartData';
 import {
   ChartSliderPosition,
   ChartType,
@@ -15,13 +18,13 @@ import {
   PairHistory,
   PlotConfig,
   Trade,
-} from '@/types';
+} from '@frequi/types';
 import { format } from 'date-fns-tz';
 import { computed, onMounted, ref, watch } from 'vue';
 import ECharts from 'vue-echarts';
 
-import { calculateDiff, getDiffColumnsFromPlotConfig } from '@/shared/charts/areaPlotDataset';
-import { dataZoomPartial } from '@/shared/charts/chartZoom';
+import { calculateDiff, getDiffColumnsFromPlotConfig } from '@frequi/shared/charts/areaPlotDataset';
+import { dataZoomPartial } from '@frequi/shared/charts/chartZoom';
 import { EChartsOption, ScatterSeriesOption } from 'echarts';
 import { BarChart, CandlestickChart, LineChart, ScatterChart } from 'echarts/charts';
 import {

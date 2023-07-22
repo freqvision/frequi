@@ -3,7 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { timestampms, timestampmsWithTimezone, timestampToDateString } from '@/shared/formatters';
+import {
+  timestampms,
+  timestampmsWithTimezone,
+  timestampToDateString,
+} from '@frequi/shared/formatters';
 
 import { computed } from 'vue';
 

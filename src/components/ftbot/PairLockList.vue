@@ -24,11 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { timestampms } from '@/shared/formatters';
-import { Lock } from '@/types';
+import { timestampms } from '@frequi/shared/formatters';
+import { Lock } from '@frequi/types';
 
-import { showAlert } from '@/stores/alerts';
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { showAlert } from '@frequi/stores/alerts';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { TableField } from 'bootstrap-vue-next';
 const botStore = useBotStore();
 

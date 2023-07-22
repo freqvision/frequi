@@ -87,15 +87,15 @@
 </template>
 
 <script setup lang="ts">
-import CandleChart from '@/components/charts/CandleChart.vue';
-import PlotConfigSelect from '@/components/charts/PlotConfigSelect.vue';
-import PlotConfigurator from '@/components/charts/PlotConfigurator.vue';
-import { usePlotConfigStore } from '@/stores/plotConfig';
-import { useSettingsStore } from '@/stores/settings';
-import { ChartSliderPosition, LoadingStatus, PairHistory, Trade } from '@/types';
+import CandleChart from '@frequi/components/charts/CandleChart.vue';
+import PlotConfigSelect from '@frequi/components/charts/PlotConfigSelect.vue';
+import PlotConfigurator from '@frequi/components/charts/PlotConfigurator.vue';
+import { usePlotConfigStore } from '@frequi/stores/plotConfig';
+import { useSettingsStore } from '@frequi/stores/settings';
+import { ChartSliderPosition, LoadingStatus, PairHistory, Trade } from '@frequi/types';
 import vSelect from 'vue-select';
 
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { computed, onMounted, ref, watch } from 'vue';
 
 const props = defineProps({

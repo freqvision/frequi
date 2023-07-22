@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 
-import { getCurrentTheme, getTheme } from '@/shared/themes';
+import { getCurrentTheme, getTheme } from '@frequi/shared/themes';
 import axios from 'axios';
-import { UiVersion } from '@/types';
-import { FtWsMessageTypes } from '@/types/wsMessageTypes';
+import { UiVersion } from '@frequi/types';
+import { FtWsMessageTypes } from '@frequi/types/wsMessageTypes';
 
 const STORE_UI_SETTINGS = 'ftUISettings';
 

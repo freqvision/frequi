@@ -58,10 +58,10 @@
 </template>
 
 <script setup lang="ts">
-import BalanceChart from '@/components/charts/BalanceChart.vue';
-import { formatPercent, formatPrice } from '@/shared/formatters';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { BalanceValues } from '@/types';
+import BalanceChart from '@frequi/components/charts/BalanceChart.vue';
+import { formatPercent, formatPrice } from '@frequi/shared/formatters';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { BalanceValues } from '@frequi/types';
 import { TableField } from 'bootstrap-vue-next';
 import { computed, ref } from 'vue';
 

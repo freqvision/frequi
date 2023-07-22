@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { computed, onMounted, watch } from 'vue';
-import { ExchangeSelection } from '@/types';
+import { ExchangeSelection } from '@frequi/types';
 
 const exchangeModel = defineModel({
   type: Object as () => ExchangeSelection,
@@ -50,8 +50,9 @@ const exchangeList = computed(() => {
 });
 
 const tradeModesTyped = computed(() => {
-  const val = botStore.activeBot.exchangeList.find((ex) => ex.name === exchangeModel.value.exchange)
-    ?.trade_modes;
+  const val = botStore.activeBot.exchangeList.find(
+    (ex) => ex.name === exchangeModel.value.exchange,
+  )?.trade_modes;
   return val ?? [];
 });
 

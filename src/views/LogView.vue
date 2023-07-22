@@ -1,11 +1,13 @@
 <template>
-  <div class="p-4 h-100">
-    <LogViewer />
-  </div>
+  <VCard title="Logs">
+    <VCardText>
+      <LogViewer />
+    </VCardText>
+  </VCard>
 </template>
 
 <script setup lang="ts">
-import LogViewer from '@/components/ftbot/LogViewer.vue';
+import LogViewer from '@frequi/components/ftbot/LogViewer.vue';
 </script>
 
 <style scoped></style>

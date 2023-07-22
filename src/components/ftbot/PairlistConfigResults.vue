@@ -41,10 +41,10 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { usePairlistConfigStore } from '@/stores/pairlistConfig';
-import ChartView from '@/views/ChartsView.vue';
-import CopyableTextfield from '@/components/general/CopyableTextfield.vue';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { usePairlistConfigStore } from '@frequi/stores/pairlistConfig';
+import ChartView from '@frequi/views/ChartsView.vue';
+import CopyableTextfield from '@frequi/components/general/CopyableTextfield.vue';
 
 const botStore = useBotStore();
 const pairlistStore = usePairlistConfigStore();

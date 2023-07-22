@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBotStore } from '@/stores/ftbotwrapper';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { onMounted, ref } from 'vue';
 
 const newblacklistpair = ref('');
