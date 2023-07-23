@@ -93,8 +93,6 @@ import PlotConfigurator from '@frequi/components/charts/PlotConfigurator.vue';
 import { usePlotConfigStore } from '@frequi/stores/plotConfig';
 import { useSettingsStore } from '@frequi/stores/settings';
 import { ChartSliderPosition, LoadingStatus, PairHistory, Trade } from '@frequi/types';
-import vSelect from 'vue-select';
-
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { computed, onMounted, ref, watch } from 'vue';
 

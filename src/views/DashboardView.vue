@@ -109,8 +109,8 @@ const botStore = useBotStore();
 const layoutStore = useLayoutStore();
 const currentBreakpoint = ref('');
 
-const breakpointChanged = (newBreakpoint) => {
-  //   // console.log('breakpoint:', newBreakpoint);
+const breakpointChanged = (newBreakpoint: string) => {
+  // console.log('breakpoint:', newBreakpoint);
   currentBreakpoint.value = newBreakpoint;
 };
 const isResizableLayout = computed(() =>

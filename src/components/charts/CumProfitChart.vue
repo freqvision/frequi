@@ -3,10 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { EChartsOption } from 'echarts'
-import ECharts from 'vue-echarts'
+import { EChartsOption } from 'echarts';
+import ECharts from 'vue-echarts';
 
-import { BarChart, LineChart } from 'echarts/charts'
+import { BarChart, LineChart } from 'echarts/charts';
 import {
   DataZoomComponent,
   DatasetComponent,
@@ -14,9 +14,9 @@ import {
   LegendComponent,
   TitleComponent,
   TooltipComponent,
-} from 'echarts/components'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
+} from 'echarts/components';
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
 
 import { dataZoomPartial } from '@frequi/shared/charts/chartZoom'
 import { useSettingsStore } from '@frequi/stores/settings'
@@ -43,91 +43,89 @@ use([
   LegendComponent,
   TitleComponent,
   TooltipComponent,
-])
+]);
 
 // Define Column labels here to avoid typos
-const CHART_PROFIT = 'Profit'
+const CHART_PROFIT = 'Profit';
 
 const props = defineProps({
   trades: { required: true, type: Array as () => ClosedTrade[] },
   openTrades: { required: false, type: Array as () => Trade[], default: () => [] },
   showTitle: { default: true, type: Boolean },
   profitColumn: { default: 'profit_abs', type: String },
-})
-const settingsStore = useSettingsStore()
+});
+const settingsStore = useSettingsStore();
 // const botList = ref<string[]>([]);
-// const cumulativeData = ref<{ date: number; profit: any }[]>([]);
 
-const chart = ref<typeof ECharts>()
+const chart = ref<typeof ECharts>();
 
 const openProfit = computed<number>(() => {
   return props.openTrades.reduce(
     (a, v) => a + (v['total_profit_abs'] ?? v[props.profitColumn] ?? 0),
     0,
-  )
-})
+  );
+});
 
 const cumulativeData = computed<CumProfitChartData[]>(() => {
-  const res: CumProfitData[] = []
-  const resD: CumProfitDataPerDate = {}
+  const res: CumProfitData[] = [];
+  const resD: CumProfitDataPerDate = {};
   const closedTrades = props.trades
     .slice()
-    .sort((a, b) => (a.close_timestamp > b.close_timestamp ? 1 : -1))
-  let profit = 0.0
+    .sort((a, b) => (a.close_timestamp > b.close_timestamp ? 1 : -1));
+  let profit = 0.0;
 
   for (let i = 0, len = closedTrades.length; i < len; i += 1) {
-    const trade = closedTrades[i]
+    const trade = closedTrades[i];
 
     if (trade.close_timestamp && trade[props.profitColumn]) {
-      profit += trade[props.profitColumn]
+      profit += trade[props.profitColumn];
       if (!resD[trade.close_timestamp]) {
         // New timestamp
-        resD[trade.close_timestamp] = { profit, [trade.botId]: profit }
+        resD[trade.close_timestamp] = { profit, [trade.botId]: profit };
       } else {
         // Add to existing profit
-        resD[trade.close_timestamp].profit += trade[props.profitColumn]
+        resD[trade.close_timestamp].profit += trade[props.profitColumn];
         if (resD[trade.close_timestamp][trade.botId]) {
-          resD[trade.close_timestamp][trade.botId] += trade[props.profitColumn]
+          resD[trade.close_timestamp][trade.botId] += trade[props.profitColumn];
         } else {
-          resD[trade.close_timestamp][trade.botId] = profit
+          resD[trade.close_timestamp][trade.botId] = profit;
         }
       }
-      res.push({ date: trade.close_timestamp, profit, [trade.botId]: profit })
+      res.push({ date: trade.close_timestamp, profit, [trade.botId]: profit });
     }
   }
 
   const valueArray: CumProfitChartData[] = Object.entries(resD).map(
     ([k, v]: [string, CumProfitData]) => {
-      const obj = { date: parseInt(k, 10), profit: v.profit }
+      const obj = { date: parseInt(k, 10), profit: v.profit };
       // TODO: The below could allow "lines" per bot"
       // this.botList.forEach((botId) => {
       // obj[botId] = v[botId];
       // });
-      return obj
+      return obj;
     },
-  )
+  );
 
   if (props.openTrades.length > 0) {
-    let lastProfit = 0
-    let lastDate = 0
+    let lastProfit = 0;
+    let lastDate = 0;
     if (valueArray.length > 0) {
-      const lastPoint = valueArray[valueArray.length - 1]
-      lastProfit = lastPoint.profit ?? 0
-      lastDate = lastPoint.date ?? 0
+      const lastPoint = valueArray[valueArray.length - 1];
+      lastProfit = lastPoint.profit ?? 0;
+      lastDate = lastPoint.date ?? 0;
     } else {
-      lastDate = props.openTrades[0].open_timestamp
+      lastDate = props.openTrades[0].open_timestamp;
     }
-    const resultWitHOpen = (lastProfit ?? 0) + openProfit.value
-    valueArray.push({ date: lastDate, currentProfit: lastProfit })
+    const resultWitHOpen = (lastProfit ?? 0) + openProfit.value;
+    valueArray.push({ date: lastDate, currentProfit: lastProfit });
     // Add one day to date to ensure it's showing properly
-    const tomorrow = Date.now() + 24 * 60 * 60 * 1000
-    valueArray.push({ date: tomorrow, currentProfit: resultWitHOpen })
+    const tomorrow = Date.now() + 24 * 60 * 60 * 1000;
+    valueArray.push({ date: tomorrow, currentProfit: resultWitHOpen });
   }
-  console.log(valueArray)
-  return valueArray
-})
+  return valueArray;
+});
 
-function updateChart(initial = false) {
+function generateChart(initial = false) {
   const chartOptionsLoc: EChartsOption = {
     dataset: {
       dimensions: ['date', 'profit', 'currentProfit'],
@@ -172,8 +170,7 @@ function updateChart(initial = false) {
         // symbol: 'none',
       },
     ],
-  }
-
+  };
   // TODO: maybe have profit lines per bot?
   // this.botList.forEach((botId: string) => {
   //   console.log('bot', botId);
@@ -190,14 +187,18 @@ function updateChart(initial = false) {
   //     // symbol: 'none',
   //   });
   // });
+  return chartOptionsLoc;
+}
+function updateChart(initial = false) {
+  const chartOptionsLoc = generateChart(initial);
   chart.value?.setOption(chartOptionsLoc, {
     replaceMerge: ['series', 'dataset'],
     noMerge: !initial,
-  })
+  });
 }
 
 function initializeChart() {
-  chart.value?.setOption({}, { noMerge: true })
+  chart.value?.setOption({}, { noMerge: true });
   const chartOptionsLoc: EChartsOption = {
     title: {
       text: 'Cumulative Profit',
@@ -207,12 +208,12 @@ function initializeChart() {
     tooltip: {
       trigger: 'axis',
       formatter: (params) => {
-        const profit = params[0].data.profit
-        const currentProfit = params[0].data['currentProfit']
+        const profit = params[0].data.profit;
+        const currentProfit = params[0].data['currentProfit'];
         const profitText = currentProfit
           ? `Projected profit (incl. unrealized): ${formatPrice(currentProfit, 3)}`
-          : `Profit: ${formatPrice(profit, 3)}`
-        return profitText
+          : `Profit: ${formatPrice(profit, 3)}`;
+        return profitText;
       },
       axisPointer: {
         type: 'line',
@@ -261,28 +262,33 @@ function initializeChart() {
         ...dataZoomPartial,
       },
     ],
-  }
-  chart.value?.setOption(chartOptionsLoc, { noMerge: true })
-  updateChart(true)
+  };
+  const chartOptionsLoc1 = generateChart(true);
+  // Merge the series and dataset, but not the rest
+  chartOptionsLoc.series = chartOptionsLoc1.series;
+  chartOptionsLoc.dataset = chartOptionsLoc1.dataset;
+
+  chart.value?.setOption(chartOptionsLoc, { noMerge: true });
+  updateChart(true);
 }
 
 onMounted(() => {
-  initializeChart()
-})
+  initializeChart();
+});
 
 watchThrottled(
   () => props.openTrades,
   () => {
-    updateChart()
+    updateChart();
   },
   { throttle: 60 * 1000 },
-)
+);
 watch(
   () => props.trades,
   () => {
-    updateChart()
+    updateChart();
   },
-)
+);
 </script>
 
 <style scoped>
