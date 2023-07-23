@@ -1,4 +1,4 @@
-import ProfitSymbol from '@/components/general/ProfitSymbol.vue';
+import ProfitSymbol from '@frequi/components/general/ProfitSymbol.vue';
 
 describe('ProfitSymbol.vue', () => {
   it('calculates isProfitable with negative profit', () => {

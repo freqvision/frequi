@@ -15,7 +15,6 @@ import { setTimezone } from './shared/formatters';
 import { onMounted, watch } from 'vue';
 import { useSettingsStore } from './stores/settings';
 const settingsStore = useSettingsStore();
-import '@frequi/plugins/bootstrap-vue';
 
 onMounted(() => {
   setTimezone(settingsStore.timezone);

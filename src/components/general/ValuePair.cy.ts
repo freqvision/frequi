@@ -1,4 +1,4 @@
-import ValuePair from '@/components/general/ValuePair.vue';
+import ValuePair from '@frequi/components/general/ValuePair.vue';
 
 describe('ValuePair.vue', () => {
   it('Renders a message', () => {

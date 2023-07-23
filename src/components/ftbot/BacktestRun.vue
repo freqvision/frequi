@@ -196,18 +196,18 @@
 </template>
 
 <script setup lang="ts">
-import TimeRangeSelect from '@/components/ftbot/TimeRangeSelect.vue';
+import TimeRangeSelect from '@frequi/components/ftbot/TimeRangeSelect.vue';
 
-import FreqaiModelSelect from '@/components/ftbot/FreqaiModelSelect.vue';
-import StrategySelect from '@/components/ftbot/StrategySelect.vue';
-import TimeframeSelect from '@/components/ftbot/TimeframeSelect.vue';
+import FreqaiModelSelect from '@frequi/components/ftbot/FreqaiModelSelect.vue';
+import StrategySelect from '@frequi/components/ftbot/StrategySelect.vue';
+import TimeframeSelect from '@frequi/components/ftbot/TimeframeSelect.vue';
 
-import InfoBox from '@/components/general/InfoBox.vue';
+import InfoBox from '@frequi/components/general/InfoBox.vue';
 
-import { useBotStore } from '@/stores/ftbotwrapper';
-import { BacktestPayload } from '@/types';
+import { useBotStore } from '@frequi/stores/ftbotwrapper';
+import { BacktestPayload } from '@frequi/types';
 
-import { useBtStore } from '@/stores/btStore';
+import { useBtStore } from '@frequi/stores/btStore';
 const botStore = useBotStore();
 const btStore = useBtStore();
 
