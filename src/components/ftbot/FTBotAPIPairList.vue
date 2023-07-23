@@ -33,7 +33,7 @@
           class="me-1"
           :class="botStore.activeBot.botApiVersion >= 1.12 ? 'col-6' : ''"
           size="sm"
-          ><i-mdi-plus-box-outline />
+          ><VIcon icon="mdi-plus-box-outline" />
         </b-button>
         <b-button
           v-if="botStore.activeBot.botApiVersion >= 1.12"
@@ -43,7 +43,7 @@
           :disabled="blacklistSelect.length === 0"
           @click="deletePairs"
         >
-          <i-mdi-delete />
+          <VIcon icon="mdi-delete" />
         </b-button>
       </div>
       <b-popover
@@ -81,7 +81,7 @@
           class="pair black"
           :active="blacklistSelect.indexOf(key) > -1"
           @click="blacklistSelectClick(key)"
-          ><span class="check"><i-mdi-check-circle /></span>{{ pair }}</b-list-group-item
+          ><span class="check"><VIcon icon="mdi-check-circle" /></span>{{ pair }}</b-list-group-item
         >
       </b-list-group>
     </div>

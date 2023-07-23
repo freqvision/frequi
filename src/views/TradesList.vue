@@ -37,7 +37,9 @@
           size="sm"
           class="align-self-start mt-1 ms-1"
           @click="botStore.activeBot.setDetailTrade(null)"
-          ><i-mdi-arrow-left /> Back</b-button
+        >
+          <VIcon icon="mdi-arrow-left" />
+          Back</b-button
         >
         <TradeDetail
           :trade="botStore.activeBot.tradeDetail"

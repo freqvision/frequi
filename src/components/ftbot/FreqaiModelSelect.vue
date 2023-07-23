@@ -9,7 +9,7 @@
       </b-form-select>
       <div class="ms-2">
         <b-button @click="botStore.activeBot.getFreqAIModelList">
-          <i-mdi-refresh />
+          <VIcon icon="mdi-refresh" />
         </b-button>
       </div>
     </div>

@@ -49,7 +49,7 @@ function deleteTradeHandler(item: Trade) {
       title="Actions"
       @click="popoverOpen = !popoverOpen"
     >
-      <i-mdi-gesture-tap />
+      <VIcon icon="mdi-gesture-tap" />
     </b-button>
     <b-popover
       :target="`btn-actions-${id}`"
@@ -67,9 +67,9 @@ function deleteTradeHandler(item: Trade) {
         @cancel-open-order="cancelOpenOrderHandler"
         @reload-trade="handleReloadTrade"
       />
-      <b-button class="mt-1 w-100 text-start" size="sm" @click="popoverOpen = false">
-        <i-mdi-cancel class="me-1" />Close Actions menu
-      </b-button>
+      <VBtn class="mt-1 w-100 text-start" icon="cancel" @click="popoverOpen = false">
+        Close Actions menu
+      </VBtn>
     </b-popover>
   </div>
 </template>

@@ -11,7 +11,7 @@
       </v-select>
     </b-form-group>
     <b-button size="sm" title="Abort" class="ms-1 mt-auto" variant="secondary" @click="abort">
-      <i-mdi-close />
+      <VIcon icon="mdi-close" />
     </b-button>
   </div>
 </template>

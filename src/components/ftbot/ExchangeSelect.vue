@@ -17,7 +17,7 @@
     </b-form-select>
     <div class="ms-2">
       <b-button size="sm" @click="botStore.activeBot.getExchangeList">
-        <i-mdi-refresh />
+        <VIcon icon="mdi-refresh" />
       </b-button>
     </div>
   </div>

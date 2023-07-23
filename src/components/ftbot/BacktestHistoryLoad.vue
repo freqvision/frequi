@@ -6,7 +6,7 @@
       aria-label="Refresh"
       @click="botStore.activeBot.getBacktestHistory"
     >
-      <i-mdi-refresh />
+      <VIcon icon="mdi-refresh" />
     </button>
     <p>
       Load Historic results from disk. You can click on multiple results to load all of them into

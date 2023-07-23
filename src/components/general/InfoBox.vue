@@ -1,6 +1,6 @@
 <template>
   <div :title="hint">
-    <i-mdi-information-outline />
+    <VIcon icon="mdi-information-outline" />
   </div>
 </template>
 

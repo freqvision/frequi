@@ -1,68 +1,74 @@
 <template>
   <div class="d-flex flex-column">
-    <b-button
+    <VBtn
       v-if="botApiVersion <= 1.1"
-      class="btn-xs text-start"
-      size="sm"
+      class="text-start"
+      size="small"
       title="Forceexit"
+      icon="disabled_by_default"
       @click="$emit('forceExit', trade)"
     >
-      <i-mdi-close-box class="me-1" />Forceexit
-    </b-button>
-    <b-button
+      Forceexit
+    </VBtn>
+    <VBtn
       v-if="botApiVersion > 1.1"
-      class="btn-xs text-start"
-      size="sm"
+      class="text-start"
+      size="small"
       title="Forceexit limit"
+      icon="disabled_by_default"
       @click="$emit('forceExit', trade, 'limit')"
     >
-      <i-mdi-close-box class="me-1" />Forceexit limit
-    </b-button>
-    <b-button
+      Forceexit limit
+    </VBtn>
+    <VBtn
       v-if="botApiVersion > 1.1"
-      class="btn-xs text-start mt-1"
-      size="sm"
+      class="text-start mt-1"
+      size="small"
       title="Forceexit market"
+      icon="disabled_by_default"
       @click="$emit('forceExit', trade, 'market')"
     >
-      <i-mdi-close-box class="me-1" />Forceexit market
-    </b-button>
-    <b-button
+      Forceexit market
+    </VBtn>
+    <VBtn
       v-if="botApiVersion > 2.16"
-      class="btn-xs text-start mt-1"
-      size="sm"
+      class="text-start mt-1"
+      size="small"
       title="Forceexit partial"
+      icon="tab_close"
       @click="$emit('forceExitPartial', trade)"
     >
-      <i-mdi-close-box-multiple class="me-1" />Forceexit partial
-    </b-button>
-    <b-button
+      Forceexit partial
+    </VBtn>
+    <VBtn
       v-if="botApiVersion >= 2.24 && trade.open_order_id"
       class="btn-xs text-start mt-1"
-      size="sm"
+      size="small"
       title="Cancel open orders"
+      icon="close"
       @click="$emit('cancelOpenOrder', trade)"
     >
-      <i-mdi-cancel class="me-1" />Cancel open order
-    </b-button>
-    <b-button
+      Cancel open order
+    </VBtn>
+    <VBtn
       v-if="botApiVersion >= 2.28"
-      class="btn-xs text-start mt-1"
-      size="sm"
+      class="text-start mt-1"
+      size="small"
       title="Reload"
+      icon="sync_problem"
       @click="$emit('reloadTrade', trade)"
     >
-      <i-mdi-reload-alert class="me-1" />Reload Trade
-    </b-button>
-    <b-button
-      class="btn-xs text-start mt-1"
-      size="sm"
+      Reload Trade
+    </VBtn>
+    <VBtn
+      class="text-start mt-1"
+      size="small"
       title="Delete trade"
+      icon="delete"
       @click="$emit('deleteTrade', trade)"
     >
-      <i-mdi-delete class="me-1" />
       Delete
-    </b-button>
+    </VBtn>
   </div>
 </template>
 

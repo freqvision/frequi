@@ -11,11 +11,11 @@
 
     <div class="d-flex ms-2">
       <b-button type="submit" size="sm" title="Save">
-        <i-mdi-check />
+        <VIcon icon="mdi-check" />
       </b-button>
 
       <b-button class="ms-1" size="sm" title="Cancel" @click="$emit('cancelled')">
-        <i-mdi-close />
+        <VIcon icon="mdi-close" />
       </b-button>
     </div>
   </form>

@@ -12,7 +12,7 @@
       title="Auto Refresh All bots"
       @click="botStore.allRefreshFull"
     >
-      <VIcon>refresh</VIcon>
+      <VIcon icon="mdi-refresh" />
     </VBtn>
   </div>
 </template>

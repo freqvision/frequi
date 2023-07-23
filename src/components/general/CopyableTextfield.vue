@@ -1,7 +1,8 @@
 <template>
   <div class="copy-container position-relative">
-    <i-mdi-content-copy
+    <VIcon
       v-if="isSupported && isValid"
+      icon="mdi-content-copy"
       role="button"
       class="copy-button position-absolute end-0 mt-1 me-2"
       @click="copy(typeof content === 'string' ? content : JSON.stringify(content))"

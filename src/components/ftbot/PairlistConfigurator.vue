@@ -20,7 +20,7 @@
           :disabled="pairlistStore.config.pairlists.length == 0 && !pairlist.is_pairlist_generator"
           @click="pairlistStore.addToConfig(pairlist, pairlistStore.config.pairlists.length)"
         >
-          <i-mdi-arrow-right-bold-box-outline class="fs-4" />
+          <VIcon icon="mdi-arrow-right-bold-box-outline" class="fs-4" />
         </b-button>
       </b-list-group-item>
     </b-list-group>

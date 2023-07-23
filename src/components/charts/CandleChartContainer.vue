@@ -16,7 +16,7 @@
           </v-select>
 
           <b-button class="ms-2" :disabled="!!!pair" size="sm" @click="refresh">
-            <i-mdi-refresh />
+            <VIcon icon="mdi-refresh" />
           </b-button>
           <small v-if="dataset" class="ms-2 text-nowrap" title="Long entry signals"
             >Long signals: {{ dataset.enter_long_signals || dataset.buy_signals }}</small
@@ -42,7 +42,7 @@
 
           <div class="ms-2 me-0 me-md-1">
             <b-button size="sm" title="Plot configurator" @click="showConfigurator">
-              <i-mdi-cog width="12" height="12" />
+              <VIcon icon="mdi-cog" width="12" height="12" />
             </b-button>
           </div>
         </div>

@@ -1,46 +1,46 @@
 <template>
-  <footer class="d-md-none">
+  <footer class="">
     <!-- Only visible on xs (phone) viewport! -->
     <hr class="my-0" />
     <div class="d-flex flex-align-center justify-content-between px-2">
       <router-link
         v-if="!botStore.canRunBacktest"
         class="nav-link navbar-nav align-items-center"
-        to="/open_trades"
+        to="/freqtrade/open_trades"
       >
-        <i-mdi-folder-open height="24" width="24" />
+        <VIcon icon="mdi-folder-open" />
         Trades
       </router-link>
       <router-link
         v-if="!botStore.canRunBacktest"
         class="nav-link navbar-nav align-items-center"
-        to="/trade_history"
+        to="/freqtrade/trade_history"
       >
-        <i-mdi-folder-lock height="24" width="24" />
+        <VIcon icon="mdi-folder-lock" />
         History
       </router-link>
       <router-link
         v-if="!botStore.canRunBacktest"
         class="nav-link navbar-nav align-items-center"
-        to="/pairlist"
+        to="/freqtrade/pairlist"
       >
-        <i-mdi-view-list height="24" width="24" />
+        <VIcon icon="mdi-view-list" />
         Pairlist
       </router-link>
       <router-link
         v-if="!botStore.canRunBacktest"
         class="nav-link navbar-nav align-items-center"
-        to="/balance"
+        to="/freqtrade/balance"
       >
-        <i-mdi-bank height="24" width="24" />
+        <VIcon icon="mdi-bank" />
         Balance
       </router-link>
       <router-link
         v-if="!botStore.canRunBacktest"
         class="nav-link navbar-nav align-items-center"
-        to="/dashboard"
+        to="/freqtrade/dashboard"
       >
-        <i-mdi-view-dashboard-outline height="24" width="24" />
+        <VIcon icon="mdi-view-dashboard-outline" />
         Dashboard
       </router-link>
     </div>

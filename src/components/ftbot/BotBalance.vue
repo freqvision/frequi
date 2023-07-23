@@ -9,20 +9,20 @@
           :title="!showBotOnly ? 'Showing Account balance' : 'Showing Bot balance'"
           @click="showBotOnly = !showBotOnly"
         >
-          <i-mdi-robot v-if="showBotOnly" />
-          <i-mdi-bank v-else />
+          <VIcon v-if="showBotOnly" icon="mdi-robot" />
+          <VIcon v-else icon="mdi-bank" />
         </b-button>
         <b-button
           size="sm"
           :title="!hideSmallBalances ? 'Hide small balances' : 'Show all balances'"
           @click="hideSmallBalances = !hideSmallBalances"
         >
-          <i-mdi-eye-off v-if="hideSmallBalances" />
-          <i-mdi-eye v-else />
+          <VIcon v-if="hideSmallBalances" icon="mdi-eye-off" />
+          <VIcon v-else icon="mdi-eye" />
         </b-button>
 
         <b-button class="float-end" size="sm" @click="botStore.activeBot.getBalance">
-          <i-mdi-refresh />
+          <VIcon icon="mdi-refresh" />
         </b-button>
       </div>
     </div>

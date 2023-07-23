@@ -37,8 +37,9 @@
             class="ms-auto"
             variant="secondary-outline"
             @click="ordersVisible[i] = !ordersVisible[i]"
-            ><i-mdi-chevron-right v-if="!ordersVisible[i]" width="24" height="24" />
-            <i-mdi-chevron-down v-if="ordersVisible[i]" width="24" height="24" />
+          >
+            <VIcon v-if="!ordersVisible[i]" icon="mdi-chevron-right" />
+            <VIcon v-if="ordersVisible[i]" icon="mdi-chevron-down" />
           </b-button>
         </div>
         <b-collapse v-model="ordersVisible[i]">

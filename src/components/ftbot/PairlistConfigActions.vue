@@ -6,7 +6,7 @@
       variant="primary"
       @click="pairlistStore.saveConfig(pairlistStore.config.name)"
     >
-      <i-mdi-content-save />
+      <VIcon icon="mdi-content-save" />
     </b-button>
     <edit-value
       v-model="pairlistStore.config.name"

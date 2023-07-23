@@ -7,14 +7,16 @@
         @click="visible = !visible"
       >
         <span class="fw-bold fd-italic">Blacklist</span>
-        <i-mdi-chevron-down
+        <VIcon
           v-if="!visible"
+          icon="mdi-chevron-down"
           :class="!visible ? 'visible' : 'invisible'"
           role="button"
           class="fs-4"
         />
-        <i-mdi-chevron-up
+        <VIcon
           v-if="visible"
+          icon="mdi-chevron-up"
           :class="visible ? 'visible' : 'invisible'"
           role="button"
           class="fs-4"
@@ -27,7 +29,7 @@
           <span class="col-auto">Copy from:</span
           ><b-form-select v-model="copyFromConfig" size="sm" :options="configNames" />
           <b-button title="Copy" size="sm" @click="pairlistStore.duplicateBlacklist(copyFromConfig)"
-            ><i-mdi-content-copy
+            ><VIcon icon="mdi-content-copy"
           /></b-button>
         </div>
         <b-input-group
@@ -39,7 +41,7 @@
           <b-form-input v-model="pairlistStore.config.blacklist[i]" />
           <b-input-group-append>
             <b-button size="sm" @click="pairlistStore.removeFromBlacklist(i)"
-              ><i-mdi-close
+              ><VIcon icon="mdi-close"
             /></b-button>
           </b-input-group-append>
         </b-input-group>

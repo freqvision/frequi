@@ -3,7 +3,7 @@
     <div class="mb-2">
       <label class="me-auto h3">Pair Locks</label>
       <b-button class="float-end" size="sm" @click="botStore.activeBot.getLocks">
-        <i-mdi-refresh />
+        <VIcon icon="mdi-refresh" />
       </b-button>
     </div>
     <div>
@@ -15,7 +15,7 @@
             title="Delete trade"
             @click="removePairLock(row.item)"
           >
-            <i-mdi-delete />
+            <VIcon icon="mdi-delete" />
           </b-button>
         </template>
       </b-table>

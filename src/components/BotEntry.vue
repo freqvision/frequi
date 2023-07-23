@@ -15,13 +15,14 @@
           v-if="botStore.botStores[bot.botId].isBotLoggedIn"
           :title="botStore.botStores[bot.botId].isBotOnline ? 'Online' : 'Offline'"
         >
-          <i-mdi-circle
+          <VIcon
+            icon="mdi-circle"
             class="ms-2 me-1 align-middle"
             :class="botStore.botStores[bot.botId].isBotOnline ? 'online' : 'offline'"
           />
         </div>
         <div v-else title="Login info expired, please login again.">
-          <i-mdi-cancel class="offline" />
+          <VIcon icon="mdi-cancel" class="offline" />
         </div>
       </b-form-checkbox>
       <div v-if="!noButtons" class="float-end d-flex flex-align-center">
@@ -32,13 +33,13 @@
           title="Edit bot"
           @click="$emit('edit')"
         >
-          <i-mdi-pencil />
+          <VIcon icon="mdi-pencil" />
         </b-button>
         <b-button v-else class="ms-1" size="sm" title="Login again" @click="$emit('editLogin')">
-          <i-mdi-login />
+          <VIcon icon="mdi-login" />
         </b-button>
         <b-button class="ms-1" size="sm" title="Delete bot" @click="botRemoveModalVisible = true">
-          <i-mdi-delete />
+          <VIcon icon="mdi-delete" />
         </b-button>
       </div>
     </div>

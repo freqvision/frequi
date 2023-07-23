@@ -3,7 +3,8 @@
     <template #header>
       <div class="d-flex text-start align-items-center">
         <div class="d-flex flex-grow-1 align-items-center">
-          <i-mdi-reorder-horizontal
+          <VIcon
+            icon="mdi-reorder-horizontal"
             role="button"
             class="handle me-2 fs-4 flex-shrink-0"
             width="24"
@@ -18,22 +19,25 @@
             <span class="text-small">{{ pairlist.description }}</span>
           </div>
         </div>
-        <i-mdi-close
+        <VIcon
+          icon="mdi-close"
           role="button"
           width="24"
           height="24"
           class="mx-2"
           @click="pairlistStore.removeFromConfig(index)"
         />
-        <i-mdi-chevron-down
+        <VIcon
           v-if="!pairlist.showParameters"
+          icon="mdi-chevron-down"
           :class="hasParameters && !pairlist.showParameters ? 'visible' : 'invisible'"
           role="button"
           class="fs-4"
           @click="toggleVisible"
         />
-        <i-mdi-chevron-up
+        <VIcon
           v-if="pairlist.showParameters"
+          icon="mdi-chevron-up"
           :class="hasParameters && pairlist.showParameters ? 'visible' : 'invisible'"
           role="button"
           class="fs-4"

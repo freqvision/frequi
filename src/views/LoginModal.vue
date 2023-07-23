@@ -1,6 +1,8 @@
 <template>
   <div>
-    <b-button @click="openLoginModal()"><i-mdi-login class="me-1" />{{ loginText }}</b-button>
+    <b-button @click="openLoginModal()"
+      ><VIcon icon="mdi-login" class="me-1" />{{ loginText }}</b-button
+    >
     <b-modal
       id="modal-prevent-closing"
       v-model="loginViewOpen"

@@ -3,7 +3,7 @@
     <!--    <textarea v-model="formattedLogs" class="h-100" readonly></textarea>-->
     <VTextarea v-model="formattedLogs" class="log-viewer" rows="25" readonly></VTextarea>
     <b-button id="refresh-logs" size="sm" @click="botStore.activeBot.getLogs">
-      <i-mdi-refresh />
+      <VIcon icon="mdi-refresh" />
     </b-button>
   </div>
 </template>

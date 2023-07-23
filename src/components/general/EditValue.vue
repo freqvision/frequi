@@ -15,7 +15,7 @@
           :title="`Edit this ${editableName}.`"
           @click="mode = EditState.Editing"
         >
-          <i-mdi-pencil />
+          <VIcon icon="mdi-pencil" />
         </b-button>
         <b-button
           v-if="allowDuplicate"
@@ -24,7 +24,7 @@
           :title="`Duplicate ${editableName}.`"
           @click="duplicate"
         >
-          <i-mdi-content-copy />
+          <VIcon icon="mdi-content-copy" />
         </b-button>
         <b-button
           size="sm"
@@ -32,7 +32,7 @@
           :title="`Delete this ${editableName}.`"
           @click="$emit('delete', modelValue)"
         >
-          <i-mdi-delete />
+          <VIcon icon="mdi-delete" />
         </b-button>
       </template>
       <b-button
@@ -41,7 +41,8 @@
         :title="`Add new ${editableName}.`"
         variant="primary"
         @click="addNewClick"
-        ><i-mdi-plus-box-outline />
+      >
+        <VIcon icon="mdi-plus-box-outline" />
       </b-button>
       <template v-if="mode !== EditState.None">
         <b-button
@@ -50,10 +51,10 @@
           variant="primary"
           @click="saveNewName"
         >
-          <i-mdi-check />
+          <VIcon icon="mdi-check" />
         </b-button>
         <b-button size="sm" title="Abort" class="ms-1" variant="secondary" @click="abort">
-          <i-mdi-close />
+          <VIcon icon="mdi-close" />
         </b-button>
       </template>
     </div>

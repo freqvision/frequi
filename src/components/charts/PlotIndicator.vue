@@ -25,7 +25,7 @@
           </b-form-input>
           <b-input-group-append>
             <b-button variant="primary" size="sm" @click="newColor">
-              <i-mdi-dice-multiple />
+              <VIcon icon="mdi-dice-multiple" />
             </b-button>
           </b-input-group-append>
         </b-input-group>

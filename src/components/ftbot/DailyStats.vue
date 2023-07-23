@@ -3,7 +3,7 @@
     <div class="mb-2">
       <label class="me-auto h3">Daily Stats</label>
       <b-button class="float-end" size="sm" @click="botStore.activeBot.getDaily">
-        <i-mdi-refresh />
+        <VIcon icon="mdi-refresh" />
       </b-button>
     </div>
     <div>

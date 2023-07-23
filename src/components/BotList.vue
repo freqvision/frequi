@@ -13,7 +13,7 @@
         class="d-flex"
         @click="botStore.selectBot(bot.botId)"
       >
-        <i-mdi-reorder-horizontal v-if="!small" class="handle me-2 fs-4" />
+        <VIcon v-if="!small" icon="mdi-reorder-horizontal" class="handle me-2 fs-4" />
         <bot-rename
           v-if="editingBots.includes(bot.botId)"
           :bot="bot"
