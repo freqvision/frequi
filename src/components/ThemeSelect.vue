@@ -36,7 +36,7 @@ const setTheme = (themeName: string) => {
   settingsStore.currentTheme = themeName;
   activeTheme.value = themeName;
   const theme = themeName.toLowerCase() === 'bootstrap' ? 'light' : 'dark';
-  themeIcon.value = theme === 'light' ? 'dark_mode' : 'light_mode';
+  themeIcon.value = theme === 'light' ? 'mdi-theme-light-dark' : 'mdi-theme-light-dark';
   emit('change', theme);
 };
 
