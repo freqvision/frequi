@@ -3,14 +3,30 @@
     <h3>Available results:</h3>
     <b-list-group class="ms-2">
       <b-list-group-item
-        v-for="[key, strat] in Object.entries(backtestHistory)"
+        v-for="[key, result] in Object.entries(backtestHistory)"
         :key="key"
         button
         :active="key === selectedBacktestResultKey"
-        class="d-flex justify-content-between align-items-center py-1"
+        class="d-flex justify-content-between align-items-center py-1 pe-1"
         @click="setBacktestResult(key)"
       >
-        {{ key }} {{ strat.total_trades }} {{ formatPercent(strat.profit_total) }}
+        <div class="d-flex flex-column">
+          <div class="fw-bold">
+            {{ result.metadata.strategyName }} - {{ result.strategy.timeframe }}
+          </div>
+          <div class="text-small">
+            TradeCount: {{ result.strategy.total_trades }} - Profit:
+            {{ formatPercent(result.strategy.profit_total) }}
+          </div>
+        </div>
+        <b-button
+          class="ms-2"
+          size="sm"
+          title="Delete this Result."
+          @click.stop="emit('removeResult', key)"
+        >
+          <VIcon icon="mdi-delete" />
+        </b-button>
       </b-list-group-item>
     </b-list-group>
   </div>
@@ -18,17 +34,21 @@
 
 <script setup lang="ts">
 import { formatPercent } from '@frequi/shared/formatters';
-import { StrategyBacktestResult } from '@frequi/types';
+import { BacktestResultInMemory } from '@frequi/types';
 
 defineProps({
   backtestHistory: {
     required: true,
-    type: Object as () => Record<string, StrategyBacktestResult>,
+    type: Object as () => Record<string, BacktestResultInMemory>,
   },
   selectedBacktestResultKey: { required: false, default: '', type: String },
 });
-const emit = defineEmits(['selectionChange']);
-const setBacktestResult = (key) => {
+const emit = defineEmits<{
+  selectionChange: [value: string];
+  removeResult: [value: string];
+}>();
+
+const setBacktestResult = (key: string) => {
   emit('selectionChange', key);
 };
 </script>

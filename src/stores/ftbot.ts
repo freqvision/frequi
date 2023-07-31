@@ -43,6 +43,8 @@ import {
   PairlistEvalResponse,
   PairlistsPayload,
   PairlistsResponse,
+  BacktestResultInMemory,
+  BacktestMetadataWithStrategyName,
 } from '@frequi/types';
 import axios, { AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
@@ -102,7 +104,7 @@ export function createBotSubStore(botId: string, botName: string) {
         backtestTradeCount: 0,
         backtestResult: undefined as BacktestResult | undefined,
         selectedBacktestResultKey: '',
-        backtestHistory: {} as Record<string, StrategyBacktestResult>,
+        backtestHistory: {} as Record<string, BacktestResultInMemory>,
         backtestHistoryList: [] as BacktestHistoryEntry[],
         sysInfo: {} as SysInfoResponse,
       };
@@ -114,7 +116,8 @@ export function createBotSubStore(botId: string, botName: string) {
       stakeCurrencyDecimals: (state) => state.botState?.stake_currency_decimals || 3,
       canRunBacktest: (state) => state.botState?.runmode === RunModes.WEBSERVER,
       isWebserverMode: (state) => state.botState?.runmode === RunModes.WEBSERVER,
-      selectedBacktestResult: (state) => state.backtestHistory[state.selectedBacktestResultKey],
+      selectedBacktestResult: (state) =>
+        state.backtestHistory[state.selectedBacktestResultKey]?.strategy || {},
       shortAllowed: (state) => state.botState?.short_allowed || false,
       openTradeCount: (state) => state.openTrades.length,
       isTrading: (state) =>
@@ -168,7 +171,6 @@ export function createBotSubStore(botId: string, botName: string) {
         try {
           const result = await api.get('/ping');
           const now = Date.now();
-          // TODO: Name collision!
           this.ping = `${result.data.status} ${now.toString()}`;
           this.setIsBotOnline(true);
           return Promise.resolve();
@@ -363,29 +365,36 @@ export function createBotSubStore(botId: string, botName: string) {
           reject(error);
         });
       },
-      getPairHistory(payload: PairHistoryPayload) {
+      async getPairHistory(payload: PairHistoryPayload) {
         if (payload.pair && payload.timeframe) {
           this.historyStatus = LoadingStatus.loading;
-          return api
-            .get('/pair_history', {
+          try {
+            const { data } = await api.get('/pair_history', {
               params: { ...payload },
               timeout: 50000,
-            })
-            .then((result) => {
-              this.history = {
-                [`${payload.pair}__${payload.timeframe}`]: {
-                  pair: payload.pair,
-                  timeframe: payload.timeframe,
-                  timerange: payload.timerange,
-                  data: result.data,
-                },
-              };
-              this.historyStatus = LoadingStatus.success;
-            })
-            .catch((err) => {
-              console.error(err);
-              this.historyStatus = LoadingStatus.error;
             });
+            this.history = {
+              [`${payload.pair}__${payload.timeframe}`]: {
+                pair: payload.pair,
+                timeframe: payload.timeframe,
+                timerange: payload.timerange,
+                data: data,
+              },
+            };
+            this.historyStatus = LoadingStatus.success;
+          } catch (err) {
+            console.error(err);
+            this.historyStatus = LoadingStatus.error;
+            if (axios.isAxiosError(err)) {
+              console.error(err.response);
+              const errMsg = err.response?.data?.detail ?? 'Error fetching history';
+              showAlert(errMsg, 'danger');
+            }
+
+            return new Promise((resolve, reject) => {
+              reject(err);
+            });
+          }
         }
         // Error branchs
         const error = 'pair or timeframe or timerange not specified';
@@ -436,6 +445,11 @@ export function createBotSubStore(botId: string, botName: string) {
           return Promise.resolve(data);
         } catch (error) {
           console.error(error);
+          if (axios.isAxiosError(error)) {
+            console.error(error.response);
+            const errMsg = error.response?.data?.detail ?? 'Error fetching history';
+            showAlert(errMsg, 'warning');
+          }
           return Promise.reject(error);
         }
       },
@@ -880,18 +894,26 @@ export function createBotSubStore(botId: string, botName: string) {
         }
       },
       async getBacktestHistory() {
-        const result = await api.get<BacktestHistoryEntry[]>('/backtest/history');
-        this.backtestHistoryList = result.data;
+        const { data } = await api.get<BacktestHistoryEntry[]>('/backtest/history');
+        this.backtestHistoryList = data;
       },
       updateBacktestResult(backtestResult: BacktestResult) {
         this.backtestResult = backtestResult;
         // TODO: Properly identify duplicates to avoid pushing the same multiple times
         Object.entries(backtestResult.strategy).forEach(([key, strat]) => {
-          console.log(key, strat);
+          const metadata: BacktestMetadataWithStrategyName = {
+            ...(backtestResult.metadata[key] ?? {}),
+            strategyName: key,
+          };
+          console.log(key, strat, metadata);
 
           const stratKey = `${key}_${strat.total_trades}_${strat.profit_total.toFixed(3)}`;
+          const btResult: BacktestResultInMemory = {
+            metadata,
+            strategy: strat,
+          };
           // this.backtestHistory[stratKey] = strat;
-          this.backtestHistory = { ...this.backtestHistory, ...{ [stratKey]: strat } };
+          this.backtestHistory = { ...this.backtestHistory, ...{ [stratKey]: btResult } };
           this.selectedBacktestResultKey = stratKey;
         });
       },
@@ -903,8 +925,30 @@ export function createBotSubStore(botId: string, botName: string) {
           this.updateBacktestResult(result.data.backtest_result);
         }
       },
+      async deleteBacktestHistoryResult(btHistoryEntry: BacktestHistoryEntry) {
+        try {
+          const { data } = await api.delete<BacktestHistoryEntry[]>(
+            `/backtest/history/${btHistoryEntry.filename}`,
+          );
+          this.backtestHistoryList = data;
+        } catch (err) {
+          console.error(err);
+          return Promise.reject(err);
+        }
+      },
       setBacktestResultKey(key: string) {
         this.selectedBacktestResultKey = key;
+      },
+      removeBacktestResultFromMemory(key: string) {
+        if (this.selectedBacktestResultKey === key) {
+          // Get first key from backtestHistory that is not the key to be deleted
+          const keys = Object.keys(this.backtestHistory);
+          const index = keys.findIndex((k) => k !== key);
+          if (index !== -1) {
+            this.selectedBacktestResultKey = keys[index];
+          }
+        }
+        delete this.backtestHistory[key];
       },
       async getSysInfo() {
         try {

@@ -140,7 +140,6 @@ export interface StrategyBacktestResult {
   canceled_entry_orders?: number;
   replaced_entry_orders?: number;
 
-  // Daily stats ...
   draw_days: number;
   drawdown_end: string;
   drawdown_end_ts: number;
@@ -148,6 +147,8 @@ export interface StrategyBacktestResult {
   drawdown_start_ts: number;
   loser_holding_avg: string;
   loser_holding_avg_s: number;
+  max_consecutive_wins?: number;
+  max_consecutive_losses?: number;
   losing_days: number;
   max_drawdown: number;
   max_drawdown_account: number;
@@ -181,9 +182,28 @@ export interface StrategyBacktestResult {
   backtest_run_end_ts: number;
 }
 
+export interface BacktestMetadata {
+  /** Start time of the backtest run */
+  backtest_run_start_ts: number;
+  run_id: string;
+}
+
+export interface BacktestMetadataWithStrategyName extends BacktestMetadata {
+  strategyName: string;
+}
+
+/**
+ * Represents the in-memory result of a backtest.
+ */
+export interface BacktestResultInMemory {
+  strategy: StrategyBacktestResult;
+  metadata: BacktestMetadataWithStrategyName;
+}
+
 export interface BacktestResult {
   strategy: Record<string, StrategyBacktestResult>;
   strategy_comparison: Array<Record<string, string | number>>;
+  metadata: Record<string, BacktestMetadata>;
 }
 
 export enum BacktestSteps {
