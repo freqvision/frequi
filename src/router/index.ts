@@ -89,28 +89,24 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  const { items } = await fetchBotList({ authorize: 1 });
+
+  items.forEach(({ name, authData, username, botUrl }) => {
+    const userService = useUserService(name);
+    const data: AuthStorage = {
+      botName: name,
+      apiUrl: botUrl,
+      refreshToken: authData.refresh_token,
+      accessToken: authData.access_token,
+      autoRefresh: true,
+      username,
+    };
+    userService.storeLoginInfo(data);
+  });
+
   // Init bots here...
   initBots();
   const botStore = useBotStore();
-
-  if (!botStore.hasBots) {
-    const { items } = await fetchBotList({ authorize: 1 });
-
-    items.forEach(({ name, authData, username, botUrl }) => {
-      const userService = useUserService(name);
-      const data: AuthStorage = {
-        botName: name,
-        apiUrl: botUrl,
-        refreshToken: authData.refresh_token,
-        accessToken: authData.access_token,
-        autoRefresh: true,
-        username,
-      };
-      userService.storeLoginInfo(data);
-    });
-
-    initBots();
-  }
 
   if (!to.meta?.allowAnonymous && !botStore.hasBots) {
     // Forward to login if login is required
