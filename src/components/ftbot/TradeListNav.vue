@@ -35,7 +35,7 @@
           <b-button
             size="sm"
             class="ms-auto"
-            variant="secondary-outline"
+            variant="outline-secondary"
             @click="ordersVisible[i] = !ordersVisible[i]"
           >
             <VIcon v-if="!ordersVisible[i]" icon="mdi-chevron-right" />

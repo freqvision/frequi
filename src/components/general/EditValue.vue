@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -105,8 +105,11 @@ enum EditState {
   Duplicating,
 }
 
-const localName = ref<string>(props.modelValue);
+const localName = ref<string>('');
 const mode = ref<EditState>(EditState.None);
+onMounted(() => {
+  localName.value = props.modelValue;
+});
 
 function abort() {
   mode.value = EditState.None;

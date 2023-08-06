@@ -40,6 +40,9 @@ import {
   TooltipComponent,
   VisualMapComponent,
   VisualMapPiecewiseComponent,
+  // MarkAreaComponent,
+  MarkLineComponent,
+  // MarkPointComponent,
 } from 'echarts/components';
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -57,6 +60,9 @@ use([
   TooltipComponent,
   VisualMapComponent,
   VisualMapPiecewiseComponent,
+  // MarkAreaComponent,
+  MarkLineComponent,
+  // MarkPointComponent,
 
   CandlestickChart,
   BarChart,

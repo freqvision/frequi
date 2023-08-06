@@ -88,6 +88,13 @@
         background: $bg-dark;
     }
 
+    .list-group-item.disabled,
+    .list-group-item:disabled {
+        color: rgba(var(--v-theme-background), 1);
+        //color: darken($fg-color, 40%);
+        background: $bg-dark;
+    }
+
     // .custom-select {
     //     color: $fg-color;
     //     // background: $bg-dark;
@@ -237,7 +244,8 @@
     }
 
     .b-toast .toast {
-        background: $bg-dark;
+        color: black;
+        //background: $bg-dark;
         //border-color: lighten($bg-dark, 20%);
         border-color: rgba(var(--v-theme-surface), 1);
     }
@@ -245,7 +253,7 @@
     .toast-header {
         color: $fg-color;
         //background: darken($bg-dark, 10%);
-        background: rgba(var(--v-theme-background), 1);
+        //background: rgba(var(--v-theme-background), 1);
         //border-color: lighten($bg-dark, 20%);
         border-color: rgba(var(--v-theme-surface), 1);
     }
