@@ -30,7 +30,7 @@ export class UserService {
   /**
    * Stores info for current botId in the object of all bots.
    */
-  private storeLoginInfo(loginInfo: AuthStorage): void {
+  storeLoginInfo(loginInfo: AuthStorage): void {
     const allInfo = UserService.getAllLoginInfos();
     allInfo[this.botId] = loginInfo;
     localStorage.setItem(AUTH_LOGIN_INFO, JSON.stringify(allInfo));

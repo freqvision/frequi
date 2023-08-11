@@ -1,9 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { initBots, useBotStore } from '@frequi/stores/ftbotwrapper';
-import { useUserService } from '@frequi/shared/userService';
-import { fetchBotList } from '@/api/bot';
-
-import { AuthStorage } from '@/types';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -84,26 +80,11 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/'),
   routes,
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { items } = await fetchBotList({ authorize: 1 });
-
-  items.forEach(({ name, authData, username, botUrl }) => {
-    const userService = useUserService(name);
-    const data: AuthStorage = {
-      botName: name,
-      apiUrl: botUrl,
-      refreshToken: authData.refresh_token,
-      accessToken: authData.access_token,
-      autoRefresh: true,
-      username,
-    };
-    userService.storeLoginInfo(data);
-  });
-
   // Init bots here...
   initBots();
   const botStore = useBotStore();

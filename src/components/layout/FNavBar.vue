@@ -8,7 +8,7 @@
               :color="currentRoute === route ? 'primary' : 'default'"
               variant="text"
               size="small"
-              @click="inertiaRouter.get(route)"
+              :to="route"
               >{{ title }}</VBtn
             >
           </div>
@@ -62,13 +62,12 @@ import Favico from 'favico.js';
 import ReloadControl from '@frequi/components/ftbot/ReloadControl.vue';
 import BotEntry from '@frequi/components/BotEntry.vue';
 import BotList from '@frequi/components/BotList.vue';
-import { ref, onBeforeUnmount, onMounted, watch } from 'vue';
+import { ref, onBeforeUnmount, onMounted, watch, computed } from 'vue';
 import { OpenTradeVizOptions, useSettingsStore } from '@frequi/stores/settings';
 import { useLayoutStore } from '@frequi/stores/layout';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { useRoute } from 'vue-router';
 import router from '@frequi/router';
-import { router as inertiaRouter } from '@inertiajs/core';
 
 const botStore = useBotStore();
 
