@@ -69,6 +69,7 @@ import { OpenTradeVizOptions, useSettingsStore } from '@frequi/stores/settings';
 import { useLayoutStore } from '@frequi/stores/layout';
 import { showAlert } from '@frequi/stores/alerts';
 import { FtWsMessageTypes } from '@frequi/types/wsMessageTypes';
+import BotList from '@frequi/components/BotList.vue';
 
 const settingsStore = useSettingsStore();
 const layoutStore = useLayoutStore();

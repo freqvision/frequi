@@ -88,7 +88,6 @@ router.beforeEach(async (to, from, next) => {
   // Init bots here...
   initBots();
   const botStore = useBotStore();
-
   if (!to.meta?.allowAnonymous && !botStore.hasBots) {
     // Forward to login if login is required
     next({

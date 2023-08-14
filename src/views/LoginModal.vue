@@ -1,8 +1,7 @@
 <template>
   <div>
-    <b-button @click="openLoginModal()"
-      ><VIcon icon="mdi-login" class="me-1" />{{ loginText }}</b-button
-    >
+    <VBtn @click="router.get('/bot')">Go to bot page</VBtn>
+    <VBtn class="ml-2" @click="openLoginModal()"><VIcon icon="mdi-login" />{{ loginText }}</VBtn>
     <b-modal
       id="modal-prevent-closing"
       v-model="loginViewOpen"
@@ -23,6 +22,7 @@
 import Login from '@frequi/components/BotLogin.vue';
 import { AuthStorageWithBotId } from '@frequi/types';
 import { nextTick, ref } from 'vue';
+import { router } from '@inertiajs/vue3';
 
 defineProps({
   loginText: { required: false, default: 'Login', type: String },

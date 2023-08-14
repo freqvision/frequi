@@ -42,6 +42,7 @@
       </b-list-group-item>
     </b-list-group>
   </div>
+  <MessageBox ref="msgBox" />
 </template>
 
 <script setup lang="ts">

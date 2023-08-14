@@ -10,7 +10,8 @@ import {
   generateCandleSeries,
 } from '@frequi/shared/charts/candleChartSeries';
 import heikinashi from '@frequi/shared/charts/heikinashi';
-import { getTradeEntries } from '@frequi/shared/charts/tradeChartData';
+import { generateTradeSeries } from '@frequi/shared/charts/tradeChartData';
+
 import {
   ChartSliderPosition,
   ChartType,

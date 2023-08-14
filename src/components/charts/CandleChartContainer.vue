@@ -4,16 +4,15 @@
       <div class="d-flex me-0">
         <div class="ms-2 d-flex flex-wrap flex-md-nowrap align-items-center w-auto">
           <span class="ms-2 text-nowrap">{{ strategyName }} | {{ timeframe || '' }}</span>
-          <v-select
+          <VSelect
             v-model="pair"
             class="ms-2"
-            :options="availablePairs"
+            :items="availablePairs"
             style="min-width: 7em"
-            size="sm"
+            density="compact"
             :clearable="false"
-            @input="refresh"
-          >
-          </v-select>
+            @update:model-value="refresh"
+          />
 
           <b-button class="ms-2" :disabled="!!!pair" size="sm" @click="refresh">
             <VIcon icon="mdi-refresh" />

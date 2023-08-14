@@ -1,5 +1,5 @@
 <template>
-  <footer class="">
+  <footer class="d-md-none">
     <!-- Only visible on xs (phone) viewport! -->
     <hr class="my-0" />
     <div class="d-flex flex-align-center justify-content-between px-2">

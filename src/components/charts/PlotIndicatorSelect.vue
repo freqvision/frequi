@@ -1,14 +1,13 @@
 <template>
   <div class="d-flex flex-row">
     <b-form-group class="flex-grow-1" :label="label" label-for="indicatorSelector">
-      <v-select
+      <VSelect
         v-model="selAvailableIndicator"
-        :options="columns"
-        size="sm"
+        :items="columns"
+        density="compact"
         :clearable="false"
-        @option:selected="emitIndicator"
-      >
-      </v-select>
+        @update:model-value="emitIndicator"
+      />
     </b-form-group>
     <b-button size="sm" title="Abort" class="ms-1 mt-auto" variant="secondary" @click="abort">
       <VIcon icon="mdi-close" />
