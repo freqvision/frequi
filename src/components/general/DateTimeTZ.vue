@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import {
-  timestampms,
+  timestampmsOrNa,
   timestampmsWithTimezone,
   timestampToDateString,
 } from '@frequi/shared/formatters';
@@ -23,7 +23,7 @@ const formattedDate = computed((): string => {
   if (props.showTimezone) {
     return timestampmsWithTimezone(props.date);
   }
-  return timestampms(props.date);
+  return timestampmsOrNa(props.date);
 });
 
 const timezoneTooltip = computed((): string => {

@@ -76,6 +76,12 @@
         }}
       </span>
     </p>
+    <BotProfit
+      class="mx-1"
+      :profit="botStore.activeBot.profit"
+      :stake-currency="botStore.activeBot.botState.stake_currency"
+      :stake-currency-decimals="botStore.activeBot.botState.stake_currency_decimals ?? 3"
+    />
   </div>
 </template>
 
@@ -83,6 +89,7 @@
 import { formatPercent, formatPriceCurrency } from '@frequi/shared/formatters';
 import DateTimeTZ from '@frequi/components/general/DateTimeTZ.vue';
 
+import BotProfit from '@frequi/components/ftbot/BotProfit.vue';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 
 const botStore = useBotStore();

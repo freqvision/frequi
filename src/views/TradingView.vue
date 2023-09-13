@@ -23,12 +23,12 @@
             <b-tab title="Balance" lazy>
               <Balance />
             </b-tab>
-            <b-tab title="Daily Stats" lazy>
-              <DailyStats />
+            <b-tab title="Time Breakdown" lazy>
+              <PeriodBreakdown />
             </b-tab>
 
             <b-tab title="Pairlist" lazy>
-              <FTBotAPIPairList />
+              <PairListLive />
             </b-tab>
             <b-tab title="Pair Locks" lazy>
               <PairLockList />
@@ -107,8 +107,8 @@ import Balance from '@frequi/components/ftbot/BotBalance.vue';
 import BotControls from '@frequi/components/ftbot/BotControls.vue';
 import BotStatus from '@frequi/components/ftbot/BotStatus.vue';
 import CandleChartContainer from '@frequi/components/charts/CandleChartContainer.vue';
-import DailyStats from '@frequi/components/ftbot/DailyStats.vue';
-import FTBotAPIPairList from '@frequi/components/ftbot/FTBotAPIPairList.vue';
+import PeriodBreakdown from '@frequi/components/ftbot/PeriodBreakdown.vue';
+import PairListLive from '@frequi/components/ftbot/PairListLive.vue';
 import PairLockList from '@frequi/components/ftbot/PairLockList.vue';
 import PairSummary from '@frequi/components/ftbot/PairSummary.vue';
 import BotPerformance from '@frequi/components/ftbot/BotPerformance.vue';

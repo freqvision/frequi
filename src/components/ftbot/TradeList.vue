@@ -143,10 +143,12 @@ const rows = computed(() => {
   return props.trades.length;
 });
 
-let tableFields: TableField[] = [];
+// This using "TableField[]" below causes
+// Error: Debug Failure. No error for last overload signature
+const tableFields = ref<any[]>([]);
 
 onMounted(() => {
-  tableFields = [
+  tableFields.value = [
     { key: 'trade_id', label: 'ID' },
     { key: 'pair', label: 'Pair' },
     { key: 'amount', label: 'Amount' },
@@ -167,7 +169,6 @@ onMounted(() => {
     {
       key: 'profit',
       label: props.activeTrades ? 'Current profit %' : 'Profit %',
-
       formatter: (value: unknown, key?: string, item?: unknown) => {
         if (!item) {
           return '';
@@ -181,7 +182,7 @@ onMounted(() => {
     ...(props.activeTrades ? openFields : closedFields),
   ];
   if (props.multiBotView) {
-    tableFields.unshift({ key: 'botName', label: 'Bot' });
+    tableFields.value.unshift({ key: 'botName', label: 'Bot' });
   }
 });
 

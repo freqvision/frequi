@@ -181,7 +181,6 @@ function refresh() {
       botStore.activeBot.getPairCandles({
         pair: pair.value,
         timeframe: props.timeframe,
-        limit: 500,
       });
     }
   }

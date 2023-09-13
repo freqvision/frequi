@@ -6,7 +6,7 @@ import {
   PlotConfig,
   StrategyResult,
   BalanceInterface,
-  DailyReturnValue,
+  TimeSummaryReturnValue,
   LockResponse,
   ProfitInterface,
   BacktestResult,
@@ -16,7 +16,7 @@ import {
   LoadingStatus,
   BacktestHistoryEntry,
   RunModes,
-  DailyPayload,
+  TimeSummaryPayload,
   BlacklistResponse,
   WhitelistResponse,
   StrategyListResult,
@@ -46,6 +46,7 @@ import {
   BacktestMetadataWithStrategyName,
   BacktestMetadataPatch,
   BacktestResultUpdate,
+  TimeSummaryOptions,
 } from '@frequi/types';
 import axios, { AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
@@ -81,7 +82,9 @@ export function createBotSubStore(botId: string, botName: string) {
         profit: {} as ProfitInterface,
         botState: {} as BotState,
         balance: {} as BalanceInterface,
-        dailyStats: {} as DailyReturnValue,
+        dailyStats: {} as TimeSummaryReturnValue,
+        weeklyStats: {} as TimeSummaryReturnValue,
+        monthlyStats: {} as TimeSummaryReturnValue,
         pairlistMethods: [] as string[],
         detailTradeId: null as number | null,
         selectedPair: '',
@@ -155,14 +158,6 @@ export function createBotSubStore(botId: string, botName: string) {
       botName: (state) => state.botState?.bot_name || 'freqtrade',
       allTrades: (state) => [...state.openTrades, ...state.trades] as Trade[],
       activeLocks: (state) => state.currentLocks?.locks || [],
-      dailyStatsSorted: (state): DailyReturnValue => {
-        return {
-          ...state.dailyStats,
-          data: state.dailyStats.data
-            ? Object.values(state.dailyStats.data).sort((a, b) => (a.date > b.date ? 1 : -1))
-            : [],
-        };
-      },
     },
     actions: {
       botAdded() {
@@ -535,11 +530,20 @@ export function createBotSubStore(botId: string, botName: string) {
           return Promise.reject(error);
         }
       },
-      async getDaily(payload: DailyPayload = {}) {
+      async getTimeSummary(aggregation: TimeSummaryOptions, payload: TimeSummaryPayload = {}) {
         const { timescale = 20 } = payload;
         try {
-          const { data } = await api.get<DailyReturnValue>('/daily', { params: { timescale } });
-          this.dailyStats = data;
+          const { data } = await api.get<TimeSummaryReturnValue>(`/${aggregation}`, {
+            params: { timescale },
+          });
+          if (aggregation === TimeSummaryOptions.daily) {
+            this.dailyStats = data;
+          } else if (aggregation === TimeSummaryOptions.weekly) {
+            this.weeklyStats = data;
+          } else if (aggregation === TimeSummaryOptions.monthly) {
+            this.monthlyStats = data;
+          }
+
           return Promise.resolve(data);
         } catch (error) {
           console.error(error);
@@ -1004,7 +1008,7 @@ export function createBotSubStore(botId: string, botName: string) {
             // TODO: check for active bot ...
             if (pair === this.selectedPair) {
               // Reload pair candles
-              this.getPairCandles({ pair, timeframe, limit: 500 });
+              this.getPairCandles({ pair, timeframe });
             }
             break;
           }

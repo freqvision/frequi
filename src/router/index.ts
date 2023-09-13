@@ -42,17 +42,17 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/freqtrade/open_trades',
-    component: () => import('@frequi/views/TradesList.vue'),
+    component: () => import('@frequi/views/TradesListView.vue'),
   },
 
   {
     path: '/freqtrade/trade_history',
-    component: () => import('@frequi/views/TradesList.vue'),
+    component: () => import('@frequi/views/TradesListView.vue'),
     props: { history: true },
   },
   {
     path: '/freqtrade/pairlist',
-    component: () => import('@frequi/components/ftbot/FTBotAPIPairList.vue'),
+    component: () => import('@frequi/components/ftbot/PairListLive.vue'),
   },
   {
     path: '/freqtrade/settings',

@@ -3,8 +3,9 @@
     <VCardText class="pa-1 d-flex justify-space-between align-center">
       <div>
         <div class="d-flex align-center">
-          <div v-for="{ title, route } in menu" :key="route" class="ma-1">
+          <div v-for="{ title, route, show } in menu" :key="route" class="ma-1">
             <VBtn
+              v-if="show"
               :color="currentRoute === route ? 'primary' : 'default'"
               variant="text"
               size="small"
@@ -86,12 +87,12 @@ const topMenu = [
   {
     title: 'Trade',
     route: '/freqtrade/trade',
-    show: true,
+    show: !botStore.canRunBacktest,
   },
   {
     title: 'Dashboard',
     route: '/freqtrade/dashboard',
-    show: true,
+    show: !botStore.canRunBacktest,
   },
   {
     title: 'Chart',
@@ -99,14 +100,19 @@ const topMenu = [
     show: true,
   },
   {
-    title: 'Pairlist Config',
-    route: '/freqtrade/pairlist_config',
-    show: (botStore.activeBot?.isWebserverMode ?? false) && botStore.activeBot.botApiVersion >= 2.3,
-  },
-  {
     title: 'Logs',
     route: '/freqtrade/logs',
     show: true,
+  },
+  {
+    title: 'Backtest',
+    route: '/freqtrade/backtest',
+    show: botStore.canRunBacktest,
+  },
+  {
+    title: 'Pairlist Config',
+    route: '/freqtrade/pairlist_config',
+    show: (botStore.activeBot?.isWebserverMode ?? false) && botStore.activeBot.botApiVersion >= 2.3,
   },
 
   {
@@ -119,11 +125,7 @@ const topMenu = [
     route: '/freqtrade/trade_history',
     show: !botStore.canRunBacktest,
   },
-  {
-    title: 'Backtest',
-    route: '/freqtrade/backtest',
-    show: botStore.canRunBacktest,
-  },
+
   {
     title: 'Settings',
     route: '/freqtrade/settings',
@@ -182,6 +184,7 @@ const setTitle = () => {
 };
 
 onBeforeUnmount(() => {
+  console.log(botStore.canRunBacktest, '???');
   if (pingInterval.value) {
     clearInterval(pingInterval.value);
   }

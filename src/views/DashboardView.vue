@@ -10,7 +10,7 @@
     <VCol cols="12" md="4">
       <VCard :title="`Daily Profit ${botStore.botCount > 1 ? 'combined' : ''}`" class="h-100">
         <VCardText class="h-100">
-          <DailyChart
+          <TimePeriodChart
             v-if="botStore.allDailyStatsSelectedBots"
             :daily-stats="botStore.allDailyStatsSelectedBots"
             :show-title="false"
@@ -91,13 +91,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 
-import DailyChart from '@frequi/components/charts/DailyChart.vue';
+import TimePeriodChart from '@frequi/components/charts/TimePeriodChart.vue';
 import CumProfitChart from '@frequi/components/charts/CumProfitChart.vue';
 import TradesLogChart from '@frequi/components/charts/TradesLog.vue';
 import ProfitDistributionChart from '@frequi/components/charts/ProfitDistributionChart.vue';
 import BotComparisonList from '@frequi/components/ftbot/BotComparisonList.vue';
 import TradeList from '@frequi/components/ftbot/TradeList.vue';
-import DraggableContainer from '@frequi/components/layout/DraggableContainer.vue';
 import InfoBox from '@frequi/components/general/InfoBox.vue';
 
 import { DashboardLayout, findGridLayout, useLayoutStore } from '@frequi/stores/layout';
@@ -167,7 +166,7 @@ const responsiveGridLayouts = computed(() => {
 });
 
 onMounted(async () => {
-  await botStore.allGetDaily({ timescale: 30 });
+  botStore.allGetDaily({ timescale: 30 });
   // botStore.activeBot.getTrades();
   botStore.activeBot.getOpenTrades();
   botStore.activeBot.getProfit();

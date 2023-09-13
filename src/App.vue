@@ -8,7 +8,6 @@
 
 <script setup lang="ts">
 import FNavBar from '@frequi/components/layout/FNavBar.vue';
-import NavBar from '@frequi/components/layout/NavBar.vue';
 import NavFooter from '@frequi/components/layout/NavFooter.vue';
 import BodyLayout from '@frequi/components/layout/BodyLayout.vue';
 import { setTimezone } from './shared/formatters';
