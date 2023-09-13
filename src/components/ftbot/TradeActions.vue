@@ -35,13 +35,13 @@
       class="text-start mt-1"
       size="small"
       title="Forceexit partial"
-      icon="tab_close"
+      icon="close-box-multiple"
       @click="$emit('forceExitPartial', trade)"
     >
       Forceexit partial
     </VBtn>
     <VBtn
-      v-if="botApiVersion >= 2.24 && trade.open_order_id"
+      v-if="botApiVersion >= 2.24 && (trade.open_order_id || trade.has_open_orders)"
       class="btn-xs text-start mt-1"
       size="small"
       title="Cancel open orders"
