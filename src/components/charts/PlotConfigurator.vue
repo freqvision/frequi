@@ -163,12 +163,12 @@ import PlotIndicatorSelect from './PlotIndicatorSelect.vue';
 import { deepClone } from '@frequi/shared/deepClone';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { usePlotConfigStore } from '@frequi/stores/plotConfig';
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import randomColor from '@frequi/shared/randomColor';
 
-defineProps({
+const props = defineProps({
   columns: { required: true, type: Array as () => string[] },
-  asModal: { required: false, default: true, type: Boolean },
+  isVisible: { required: true, default: false, type: Boolean },
 });
 
 const plotStore = usePlotConfigStore();
@@ -359,19 +359,23 @@ watch(
   () => {
     selIndicatorName.value = '';
     // selSubPlot.value = '';
+    plotConfigNameLoc.value = plotStore.plotConfigName;
   },
 );
 
-onMounted(() => {
-  // Deep clone and assign to editable
-  plotStore.editablePlotConfig = deepClone(plotStore.plotConfig);
-  plotStore.isEditing = true;
-  plotConfigNameLoc.value = plotStore.plotConfigName;
-});
-onUnmounted(() => {
-  // TODO: Unmounted is not called when closing in Chart view
-  plotStore.isEditing = false;
-});
+watch(
+  () => props.isVisible,
+  () => {
+    if (props.isVisible) {
+      // Deep clone and assign to editable
+      plotStore.editablePlotConfig = deepClone(plotStore.plotConfig);
+      plotStore.isEditing = true;
+      plotConfigNameLoc.value = plotStore.plotConfigName;
+    } else {
+      plotStore.isEditing = false;
+    }
+  },
+);
 </script>
 
 <style scoped>

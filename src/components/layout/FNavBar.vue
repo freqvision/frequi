@@ -3,7 +3,7 @@
     <VCardText class="pa-1 d-flex justify-space-between align-center">
       <div>
         <div class="d-flex align-center">
-          <div v-for="{ title, route, show } in menu" :key="route" class="ma-1">
+          <div v-for="{ title, route, show } in topMenu" :key="route" class="ma-1">
             <VBtn
               v-if="show"
               :color="currentRoute === route ? 'primary' : 'default'"
@@ -137,12 +137,6 @@ const currentRoute = computed(() => {
   return router.currentRoute.value.path;
 });
 
-const menu = computed(() => {
-  return topMenu.filter(({ show }) => {
-    return show;
-  });
-});
-
 const setOpenTradesAsPill = (tradeCount: number) => {
   if (!favicon.value) {
     favicon.value = new Favico({
@@ -184,7 +178,6 @@ const setTitle = () => {
 };
 
 onBeforeUnmount(() => {
-  console.log(botStore.canRunBacktest, '???');
   if (pingInterval.value) {
     clearInterval(pingInterval.value);
   }

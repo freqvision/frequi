@@ -4,6 +4,10 @@ import { initBots, useBotStore } from '@frequi/stores/ftbotwrapper';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/freqtrade',
+    redirect: '/freqtrade/home',
+  },
+  {
+    path: '/freqtrade/home',
     name: 'Home',
     component: () => import('@frequi/views/HomeView.vue'),
     meta: {
@@ -88,7 +92,7 @@ router.beforeEach(async (to, from, next) => {
   // Init bots here...
   initBots();
   const botStore = useBotStore();
-  if (!to.meta?.allowAnonymous && !botStore.hasBots) {
+  if (to.path.includes('freqtrade') && !to.meta?.allowAnonymous && !botStore.hasBots) {
     // Forward to login if login is required
     next({
       path: '/freqtrade/login',

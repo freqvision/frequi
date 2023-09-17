@@ -13,8 +13,13 @@
             :clearable="false"
             @update:model-value="refresh"
           />
-
-          <b-button class="ms-2" :disabled="!!!pair" size="sm" @click="refresh">
+          <b-button
+            title="Refresh chart"
+            class="ms-2"
+            :disabled="!!!pair"
+            size="sm"
+            @click="refresh"
+          >
             <VIcon icon="mdi-refresh" />
           </b-button>
           <div class="d-flex flex-row flex-wrap">
@@ -71,7 +76,7 @@
     </div>
     <transition name="fade" mode="in-out">
       <div v-if="!plotConfigModal" v-show="showPlotConfig" class="w-25 config-sidebar">
-        <PlotConfigurator :columns="datasetColumns" :as-modal="false" />
+        <PlotConfigurator :columns="datasetColumns" :is-visible="showPlotConfig ?? false" />
       </div>
     </transition>
     <b-modal
@@ -82,7 +87,7 @@
       ok-only
       hide-backdrop
     >
-      <PlotConfigurator v-if="showPlotConfigModal" :columns="datasetColumns" />
+      <PlotConfigurator :is-visible="showPlotConfigModal" :columns="datasetColumns" />
     </b-modal>
   </div>
 </template>
@@ -94,6 +99,7 @@ import PlotConfigurator from '@frequi/components/charts/PlotConfigurator.vue';
 import { usePlotConfigStore } from '@frequi/stores/plotConfig';
 import { useSettingsStore } from '@frequi/stores/settings';
 import { ChartSliderPosition, LoadingStatus, PairHistory, Trade } from '@frequi/types';
+
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { computed, onMounted, ref, watch } from 'vue';
 
