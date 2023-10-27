@@ -22,19 +22,23 @@
           >
             <VIcon icon="mdi-refresh" />
           </b-button>
-          <div class="d-flex flex-row flex-wrap">
-            <small v-if="dataset" class="ms-2 text-nowrap" title="Long entry signals"
-              >Long signals: {{ dataset.enter_long_signals || dataset.buy_signals }}</small
-            >
-            <small v-if="dataset" class="ms-2 text-nowrap" title="Long exit signals"
-              >Long exit: {{ dataset.exit_long_signals || dataset.sell_signals }}</small
-            >
-            <small v-if="dataset && dataset.enter_short_signals" class="ms-2 text-nowrap"
-              >Short entries: {{ dataset.enter_short_signals }}</small
-            >
-            <small v-if="dataset && dataset.exit_short_signals" class="ms-2 text-nowrap"
-              >Short exits: {{ dataset.exit_short_signals }}</small
-            >
+          <div class="d-flex flex-column">
+            <div class="d-flex flex-row flex-wrap">
+              <small v-if="dataset" class="ms-2 text-nowrap" title="Long entry signals"
+                >Long entries: {{ dataset.enter_long_signals || dataset.buy_signals }}</small
+              >
+              <small v-if="dataset" class="ms-2 text-nowrap" title="Long exit signals"
+                >Long exit: {{ dataset.exit_long_signals || dataset.sell_signals }}</small
+              >
+            </div>
+            <div class="d-flex flex-row flex-wrap">
+              <small v-if="dataset && dataset.enter_short_signals" class="ms-2 text-nowrap"
+                >Short entries: {{ dataset.enter_short_signals }}</small
+              >
+              <small v-if="dataset && dataset.exit_short_signals" class="ms-2 text-nowrap"
+                >Short exits: {{ dataset.exit_short_signals }}</small
+              >
+            </div>
           </div>
         </div>
         <div class="ms-auto d-flex align-items-center w-auto">
@@ -43,7 +47,7 @@
           >
 
           <div class="ms-2">
-            <plot-config-select></plot-config-select>
+            <PlotConfigSelect></PlotConfigSelect>
           </div>
 
           <div class="ms-2 me-0 me-md-1">
@@ -63,6 +67,8 @@
           :use-u-t-c="settingsStore.timezone === 'UTC'"
           :theme="settingsStore.chartTheme"
           :slider-position="sliderPosition"
+          :color-up="colorStore.colorUp"
+          :color-down="colorStore.colorDown"
         >
         </CandleChart>
         <div v-else class="m-auto">
@@ -74,8 +80,8 @@
         </div>
       </div>
     </div>
-    <transition name="fade" mode="in-out">
-      <div v-if="!plotConfigModal" v-show="showPlotConfig" class="w-25 config-sidebar">
+    <transition name="fade">
+      <div v-if="!plotConfigModal" v-show="showPlotConfig" class="w-25">
         <PlotConfigurator :columns="datasetColumns" :is-visible="showPlotConfig ?? false" />
       </div>
     </transition>
@@ -102,6 +108,7 @@ import { ChartSliderPosition, LoadingStatus, PairHistory, Trade } from '@frequi/
 
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { computed, onMounted, ref, watch } from 'vue';
+import { useColorStore } from '@/stores/colors';
 
 const props = defineProps({
   trades: { required: false, default: () => [], type: Array as () => Trade[] },
@@ -121,6 +128,7 @@ const props = defineProps({
   },
 });
 const settingsStore = useSettingsStore();
+const colorStore = useColorStore();
 const botStore = useBotStore();
 const plotStore = usePlotConfigStore();
 
@@ -230,7 +238,7 @@ onMounted(() => {
   transition: all 0.2s;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   transform: translateX(30px);

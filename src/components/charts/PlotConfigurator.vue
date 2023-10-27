@@ -156,7 +156,7 @@
 import EditValue from '@frequi/components/general/EditValue.vue';
 import PlotConfigSelect from '@frequi/components/charts/PlotConfigSelect.vue';
 import PlotIndicator from '@frequi/components/charts/PlotIndicator.vue';
-import { showAlert } from '@frequi/stores/alerts';
+import { showAlert } from '@frequi/shared/alerts';
 import { IndicatorConfig, PlotConfig } from '@frequi/types';
 import PlotIndicatorSelect from './PlotIndicatorSelect.vue';
 

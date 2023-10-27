@@ -1,6 +1,7 @@
 <template>
-  <div id="app" class="d-flex flex-column vh-100">
+  <div id="app" class="d-flex flex-column vh-100" :style="colorStore.cssVars">
     <FNavBar />
+    <BToaster></BToaster>
     <BodyLayout class="flex-fill overflow-auto" />
     <NavFooter />
   </div>
@@ -13,10 +14,12 @@ import BodyLayout from '@frequi/components/layout/BodyLayout.vue';
 import { setTimezone } from './shared/formatters';
 import { onMounted, watch } from 'vue';
 import { useSettingsStore } from './stores/settings';
+import { useColorStore } from './stores/colors';
 const settingsStore = useSettingsStore();
-
+const colorStore = useColorStore();
 onMounted(() => {
   setTimezone(settingsStore.timezone);
+  colorStore.updateProfitLossColor();
 });
 watch(
   () => settingsStore.timezone,

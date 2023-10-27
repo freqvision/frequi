@@ -29,6 +29,7 @@ import { useSettingsStore } from '@frequi/stores/settings';
 import { computed } from 'vue';
 import { timestampms } from '@frequi/shared/formatters';
 import { dataZoomPartial } from '@frequi/shared/charts/chartZoom';
+import { useColorStore } from '@frequi/stores/colors';
 
 use([
   BarChart,
@@ -54,6 +55,7 @@ const props = defineProps({
   showTitle: { default: true, type: Boolean },
 });
 const settingsStore = useSettingsStore();
+const colorStore = useColorStore();
 const chartData = computed(() => {
   const res: (number | string)[][] = [];
   const sortedTrades = props.trades
@@ -140,11 +142,11 @@ const chartOptions = computed((): EChartsOption => {
         pieces: [
           {
             max: 0.0,
-            color: '#f84960',
+            color: colorStore.colorLoss,
           },
           {
             min: 0.0,
-            color: '#2ed191',
+            color: colorStore.colorProfit,
           },
         ],
       },

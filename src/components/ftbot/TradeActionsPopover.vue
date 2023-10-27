@@ -52,6 +52,7 @@ function deleteTradeHandler(item: Trade) {
       <VIcon icon="mdi-gesture-tap" />
     </b-button>
     <b-popover
+      container="body"
       :target="`btn-actions-${id}`"
       :title="`Actions for ${trade.pair}`"
       triggers="manual"

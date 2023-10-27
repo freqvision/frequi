@@ -1,30 +1,39 @@
-import { formatPercent, formatPriceCurrency } from '@frequi/shared/formatters';
+import { formatPercent, formatPriceCurrency, splitTradePair } from '@frequi/shared/formatters';
 import { roundTimeframe } from '@frequi/shared/timemath';
 import { Order, PairHistory, Trade, BTOrder } from '@frequi/types';
 import { ScatterSeriesOption } from 'echarts';
 
-function buildTooltipCost(trade: Trade, order: Order | BTOrder): string {
+function buildTooltipCost(order: Order | BTOrder, quoteCurrency: string): string {
   return `${order.ft_order_side === 'buy' ? '+' : '-'}${formatPriceCurrency(
     'cost' in order ? order.cost : order.amount * order.safe_price,
-    trade.quote_currency ?? '<stake_currency>',
+    quoteCurrency,
   )}`;
 }
 
-function buildToolTip(trade: Trade, order: Order | BTOrder, side: string): string {
-  return `${trade.is_short ? 'Short' : 'Long'} ${side}  ${formatPercent(trade.profit_ratio)}
-  ${buildTooltipCost(trade, order)}
+function buildToolTip(
+  trade: Trade,
+  order: Order | BTOrder,
+  side: string,
+  quoteCurrency: string,
+): string {
+  return `${trade.is_short ? 'Short' : 'Long'} ${side}
+  ${formatPercent(trade.profit_ratio)} ${
+    trade.profit_abs ? '(' + formatPriceCurrency(trade.profit_abs, quoteCurrency) + ')' : ''
+  }
+  ${buildTooltipCost(order, quoteCurrency)}
   Enter-tag: ${trade.enter_tag ?? ''}
   Exit-Tag: ${trade.exit_reason ?? ''}`;
 }
 
-function buildAdjustmentToolTip(trade: Trade, order: Order | BTOrder): string {
+function buildAdjustmentToolTip(
+  trade: Trade,
+  order: Order | BTOrder,
+  quoteCurrency: string,
+): string {
   return `${trade.is_short ? 'Short' : 'Long'} adjustment
-  ${buildTooltipCost(trade, order)}
+  ${buildTooltipCost(order, quoteCurrency)}
   Enter-tag: ${trade.enter_tag ?? ''}`;
 }
-
-// const ENTRY_SYMB = 'circle';
-// const EXIT_SYMB = 'rect';
 
 const ADJUSTMENT_SYMBOL =
   'path://m 52.444161,104.1909 8.386653,25.34314 8.386651,25.34313 -16.731501,0.0422 -16.731501,0.0422 8.344848,-25.38539 z m 0.08656,-48.368126 8.386652,25.343139 8.386652,25.343137 -16.731501,0.0422 -16.731502,0.0422 8.344848,-25.385389 z';
@@ -59,6 +68,7 @@ export function getTradeEntries(dataset: PairHistory, trades: Trade[]) {
       if (trade.orders) {
         for (let i = 0; i < trade.orders.length; i++) {
           const order: Order | BTOrder = trade.orders[i];
+          const { quoteCurrency } = splitTradePair(trade.quote_currency ?? trade.pair ?? '');
           if (
             order.order_filled_timestamp &&
             roundTimeframe(dataset.timeframe_ms ?? 0, order.order_filled_timestamp) <=
@@ -74,7 +84,7 @@ export function getTradeEntries(dataset: PairHistory, trades: Trade[]) {
                 order.ft_order_side == 'sell' ? 180 : 0,
                 trade.is_short ? SHORT_COLOR : LONG_COLOR,
                 trade.is_short ? 'Short' : 'Long',
-                buildToolTip(trade, order, 'entry'),
+                buildToolTip(trade, order, 'entry', quoteCurrency),
               ]);
               // Trade exit
             } else if (i === trade.orders.length - 1 && trade.close_timestamp) {
@@ -92,7 +102,7 @@ export function getTradeEntries(dataset: PairHistory, trades: Trade[]) {
                   trade.is_short ? SHORT_COLOR : LONG_COLOR,
                   // (trade.profit_abs ?? 0) > 0 ? '#31e04b' : '#fc0505',
                   formatPercent(trade.profit_ratio, 2),
-                  buildToolTip(trade, order, 'exit'),
+                  buildToolTip(trade, order, 'exit', quoteCurrency),
                 ]);
               }
             }
@@ -105,7 +115,7 @@ export function getTradeEntries(dataset: PairHistory, trades: Trade[]) {
                 order.ft_order_side == 'sell' ? 180 : 0,
                 trade.is_short ? SHORT_COLOR : LONG_COLOR,
                 '',
-                buildAdjustmentToolTip(trade, order),
+                buildAdjustmentToolTip(trade, order, quoteCurrency),
               ]);
             }
           }
