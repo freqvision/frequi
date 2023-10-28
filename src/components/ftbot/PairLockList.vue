@@ -27,7 +27,7 @@
 import { timestampms } from '@frequi/shared/formatters';
 import { Lock } from '@frequi/types';
 
-import { showAlert } from '@frequi/stores/alerts';
+import { showAlert } from '@frequi/shared/alerts';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { TableField } from 'bootstrap-vue-next';
 const botStore = useBotStore();
