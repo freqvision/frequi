@@ -1,4 +1,4 @@
-import { AlertSeverity } from '@/types/alertTypes';
+import { AlertSeverity } from '@frequi/types/alertTypes';
 import { useToast } from 'bootstrap-vue-next';
 
 export function showAlert(message: string, severity: AlertSeverity = 'warning', bot: string = '') {

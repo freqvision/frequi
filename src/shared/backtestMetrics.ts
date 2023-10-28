@@ -1,4 +1,4 @@
-import { StrategyBacktestResult, Trade } from '@/types';
+import { StrategyBacktestResult, Trade } from '@frequi/types';
 import {
   formatPercent,
   formatPrice,

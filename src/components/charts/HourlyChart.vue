@@ -27,7 +27,7 @@ import {
   VisualMapComponent,
   VisualMapPiecewiseComponent,
 } from 'echarts/components';
-import { useColorStore } from '@/stores/colors';
+import { useColorStore } from '@frequi/stores/colors';
 
 use([
   BarChart,

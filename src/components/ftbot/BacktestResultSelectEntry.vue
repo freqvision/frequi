@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { formatPercent } from '@/shared/formatters';
-import { BacktestResultInMemory } from '@/types';
+import { formatPercent } from '@frequi/shared/formatters';
+import { BacktestResultInMemory } from '@frequi/types';
 
 defineProps({
   backtestResult: {

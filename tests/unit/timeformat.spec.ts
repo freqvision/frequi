@@ -9,7 +9,7 @@ import {
   timestampHour,
   dateFromString,
   timestampmsOrNa,
-} from '@/shared/formatters';
+} from '@frequi/shared/formatters';
 
 const { getTimeZone } = exportForTesting;
 

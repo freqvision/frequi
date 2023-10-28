@@ -30,7 +30,7 @@ import { TimeSummaryReturnValue } from '@frequi/types';
 import { useSettingsStore } from '@frequi/stores/settings';
 import { EChartsOption } from 'echarts';
 import { useElementSize } from '@vueuse/core';
-import { useColorStore } from '@/stores/colors';
+import { useColorStore } from '@frequi/stores/colors';
 
 use([
   BarChart,

@@ -108,7 +108,7 @@ import { ChartSliderPosition, LoadingStatus, PairHistory, Trade } from '@frequi/
 
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { computed, onMounted, ref, watch } from 'vue';
-import { useColorStore } from '@/stores/colors';
+import { useColorStore } from '@frequi/stores/colors';
 
 const props = defineProps({
   trades: { required: false, default: () => [], type: Array as () => Trade[] },

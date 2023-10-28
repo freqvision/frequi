@@ -18,15 +18,15 @@ import {
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 
-import { dataZoomPartial } from '@frequi/shared/charts/chartZoom'
-import { useSettingsStore } from '@frequi/stores/settings'
+import { dataZoomPartial } from '@frequi/shared/charts/chartZoom';
+import { useSettingsStore } from '@frequi/stores/settings';
 import {
   ClosedTrade,
   CumProfitChartData,
   CumProfitData,
   CumProfitDataPerDate,
   Trade,
-} from '@/types';
+} from '@frequi/types';
 import { watchThrottled } from '@vueuse/core';
 import { computed, onMounted, ref, watch } from 'vue';
 import { formatPrice } from '@frequi/shared/formatters';
