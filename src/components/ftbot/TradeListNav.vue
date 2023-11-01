@@ -34,7 +34,7 @@
           </div>
           <b-button
             size="sm"
-            class="ms-auto"
+            class="ms-auto mt-auto"
             variant="outline-secondary"
             @click="ordersVisible[i] = !ordersVisible[i]"
           >
