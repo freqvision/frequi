@@ -9,8 +9,8 @@
           size="sm"
           @click="isBarVisible.left = !isBarVisible.left"
         >
-          <i-mdi-chevron-right v-if="!isBarVisible.left" width="24" height="24" />
-          <i-mdi-chevron-left v-if="isBarVisible.left" width="24" height="24" />
+          <VIcon v-if="!isBarVisible.left" icon="mdi-chevron-right" width="24" height="24" />
+          <VIcon v-if="isBarVisible.left" icon="mdi-chevron-left" width="24" height="24" />
         </b-button>
       </div>
       <span class="flex-fill">
@@ -25,8 +25,8 @@
           size="sm"
           @click="isBarVisible.right = !isBarVisible.right"
         >
-          <i-mdi-chevron-right v-if="isBarVisible.right" width="24" height="24" />
-          <i-mdi-chevron-left v-if="!isBarVisible.right" width="24" height="24" />
+          <VIcon v-if="isBarVisible.right" icon="mdi-chevron-right" width="24" height="24" />
+          <VIcon v-if="!isBarVisible.right" icon="mdi-chevron-left" width="24" height="24" />
         </b-button>
       </div>
     </div>

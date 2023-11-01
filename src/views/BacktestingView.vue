@@ -80,8 +80,8 @@
           variant="outline-secondary"
           @click="showLeftBar = !showLeftBar"
         >
-          <i-mdi-chevron-right v-if="!showLeftBar" width="24" height="24" />
-          <i-mdi-chevron-left v-if="showLeftBar" width="24" height="24" />
+          <VIcon v-if="!showLeftBar" icon="mdi-chevron-right" width="24" height="24" />
+          <VIcon v-if="showLeftBar" icon="mdi-chevron-left" width="24" height="24" />
         </b-button>
         <transition name="fade">
           <BacktestResultSelect

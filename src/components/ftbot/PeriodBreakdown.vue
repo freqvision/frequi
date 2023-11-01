@@ -3,7 +3,7 @@
     <div class="mb-2">
       <label class="me-auto h3">{{ hasWeekly ? 'Period' : 'Daily' }} Breakdown</label>
       <b-button class="float-end" size="sm" @click="refreshSummary">
-        <i-mdi-refresh />
+        <VIcon icon="mdi-refresh" />
       </b-button>
     </div>
     <b-form-radio-group
