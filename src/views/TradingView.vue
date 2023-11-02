@@ -21,7 +21,7 @@
               <BotPerformance class="performance-view" />
             </b-tab>
             <b-tab title="Balance" lazy>
-              <Balance />
+              <BotBalance />
             </b-tab>
             <b-tab title="Time Breakdown" lazy>
               <PeriodBreakdown />
@@ -103,7 +103,7 @@
 <script setup lang="ts">
 import { GridItemData } from '@frequi/types';
 
-import Balance from '@frequi/components/ftbot/BotBalance.vue';
+import BotBalance from '@frequi/components/ftbot/BotBalance.vue';
 import BotControls from '@frequi/components/ftbot/BotControls.vue';
 import BotStatus from '@frequi/components/ftbot/BotStatus.vue';
 import CandleChartContainer from '@frequi/components/charts/CandleChartContainer.vue';

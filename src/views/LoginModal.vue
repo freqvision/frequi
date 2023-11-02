@@ -8,7 +8,7 @@
       title="Login to your bot"
       @ok="handleOk"
     >
-      <login
+      <BotLogin
         ref="loginForm"
         in-modal
         :existing-auth="loginInfo"
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import Login from '@frequi/components/BotLogin.vue';
+import BotLogin from '@frequi/components/BotLogin.vue';
 import { AuthStorageWithBotId } from '@frequi/types';
 import { nextTick, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
@@ -28,7 +28,7 @@ defineProps({
   loginText: { required: false, default: 'Login', type: String },
 });
 const loginViewOpen = ref(false);
-const loginForm = ref<typeof Login>();
+const loginForm = ref<typeof BotLogin>();
 const loginInfo = ref<AuthStorageWithBotId | undefined>(undefined);
 const handleLoginResult = (result: boolean) => {
   if (result) {
