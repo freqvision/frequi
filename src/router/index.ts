@@ -46,12 +46,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/freqtrade/open_trades',
-    component: () => import('@frequi/views/TradesListView.vue'),
+    component: () => import('@frequi/views/MobileTradesListView.vue'),
   },
 
   {
     path: '/freqtrade/trade_history',
-    component: () => import('@frequi/views/TradesListView.vue'),
+    component: () => import('@frequi/views/MobileTradesListView.vue'),
     props: { history: true },
   },
   {

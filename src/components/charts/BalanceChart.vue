@@ -28,7 +28,6 @@ import { formatPriceCurrency } from '@frequi/shared/formatters';
 import { useSettingsStore } from '@frequi/stores/settings';
 import { BalanceValues } from '@frequi/types';
 import { useElementSize } from '@vueuse/core';
-import { computed, ref } from 'vue';
 
 use([
   PieChart,

@@ -34,15 +34,15 @@ export type MultiDeletePayload = MultiBotIdPayload;
 export type MultiReloadTradePayload = MultiBotIdPayload;
 export type MultiCancelOpenOrderPayload = MultiBotIdPayload;
 
-export interface PerformanceEntry {
-  count: number;
-  pair: string;
-  profit: number;
-  // TODO: profit_abs is mandatory after 2021.5
-  profit_abs?: number;
-}
-
-export type LogLine = Array<[string, number, string, string, string]>;
+/**
+ * Response from the Logs endpoint
+ * [0] FormattedDate
+ * [1] Timestamp
+ * [2] Module
+ * [3] LogLevel
+ * [4] Message
+ */
+export type LogLine = [string, number, string, string, string];
 
 export interface Logs {
   /**
@@ -182,6 +182,7 @@ export interface StrategyResult {
   strategy: string;
   /** Code of the strategy class */
   code: string;
+  timeframe: string;
 }
 
 export interface FreqAIModelListResult {
@@ -193,12 +194,14 @@ export interface AvailablePairPayload {
   stake_currency?: string;
 }
 
+export type PairIntervalTuple = [string, string, string];
+
 export interface AvailablePairResult {
   pairs: string[];
   /**
-   * List of lists, as [pair, timeframe]
+   * List of lists, as [pair, timeframe, candletype]
    */
-  pair_interval: Array<Array<string>>;
+  pair_interval: PairIntervalTuple[];
   length: number;
 }
 
@@ -275,6 +278,7 @@ export interface UiVersion {
 }
 
 export enum LoadingStatus {
+  not_loaded,
   loading,
   success,
   error,

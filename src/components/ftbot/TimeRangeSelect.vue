@@ -10,6 +10,7 @@
           :max-date="now"
           model-type="yyyy-MM-dd"
           format="yyyy-MM-dd"
+          class="mt-1"
           text-input
           auto-apply
           :enable-time-picker="false"
@@ -20,7 +21,8 @@
         <Datepicker
           v-model="dateTo"
           :dark="settingsStore.isDarkTheme"
-          :max-date="now"
+          class="mt-1"
+          :max-date="tomorrow"
           model-type="yyyy-MM-dd"
           format="yyyy-MM-dd"
           text-input
@@ -50,6 +52,8 @@ import { useSettingsStore } from '@frequi/stores/settings';
 const settingsStore = useSettingsStore();
 
 const now = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
 const dateFrom = ref<string>('');
 const dateTo = ref<string>('');
 

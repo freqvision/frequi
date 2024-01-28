@@ -21,7 +21,7 @@
           <VIcon v-else icon="mdi-eye" />
         </b-button>
 
-        <b-button class="float-end" size="sm" @click="botStore.activeBot.getBalance">
+        <b-button class="float-end" size="sm" @click="refreshBalance">
           <VIcon icon="mdi-refresh" />
         </b-button>
       </div>
@@ -123,5 +123,13 @@ const tableFields = computed<TableField[]>(() => {
       formatter: formatCurrency,
     },
   ];
+});
+
+async function refreshBalance() {
+  botStore.activeBot.getBalance();
+}
+
+onMounted(() => {
+  refreshBalance();
 });
 </script>

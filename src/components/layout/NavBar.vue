@@ -10,27 +10,20 @@
       <!-- <ReloadControl class="me-3" /> -->
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" class="text-right text-md-center" is-nav>
+      <b-collapse id="nav-collapse" class="text-center" is-nav>
         <b-navbar-nav>
-          <router-link v-if="!botStore.canRunBacktest" class="nav-link navbar-nav" to="/trade"
-            >Trade</router-link
-          >
-          <router-link v-if="!botStore.canRunBacktest" class="nav-link navbar-nav" to="/dashboard"
-            >Dashboard</router-link
-          >
-          <router-link class="nav-link navbar-nav" to="/graph">Chart</router-link>
-          <router-link class="nav-link navbar-nav" to="/logs">Logs</router-link>
-          <router-link v-if="botStore.canRunBacktest" class="nav-link navbar-nav" to="/backtest"
-            >Backtest</router-link
-          >
-          <router-link
+          <b-nav-item v-if="!botStore.canRunBacktest" to="/trade">Trade</b-nav-item>
+          <b-nav-item v-if="!botStore.canRunBacktest" to="/dashboard">Dashboard</b-nav-item>
+          <b-nav-item to="/graph">Chart</b-nav-item>
+          <b-nav-item to="/logs">Logs</b-nav-item>
+          <b-nav-item v-if="botStore.canRunBacktest" to="/backtest">Backtest</b-nav-item>
+          <b-nav-item
             v-if="
               (botStore.activeBot?.isWebserverMode ?? false) &&
               botStore.activeBot.botApiVersion >= 2.3
             "
-            class="nav-link navbar-nav"
             to="/pairlist_config"
-            >Pairlist Config</router-link
+            >Pairlist Config</b-nav-item
           >
           <theme-select />
         </b-navbar-nav>
@@ -38,6 +31,15 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ms-auto" menu-class="w-100">
           <!-- TODO This should show outside of the dropdown in XS mode -->
+          <div
+            v-if="!settingsStore.confirmDialog"
+            class="my-auto me-5"
+            title="Confirm dialog deactivated, Forced exits will be executed immediately. Be careful."
+            style="color: yellow"
+          >
+            #TODO_ICON<!--            <i-mdi-run-fast />-->
+            #TODO_ICON<!--            <i-mdi-alert />-->
+          </div>
           <div class="d-flex justify-content-between">
             <b-dropdown
               v-if="botStore.botCount > 1"
@@ -53,7 +55,7 @@
               </template>
               <BotList :small="true" />
             </b-dropdown>
-            <ReloadControl class="me-3" />
+            <ReloadControl class="me-3" title="Confirm Dialog deactivated." />
           </div>
           <li
             class="d-none d-sm-flex flex-sm-wrap flex-lg-nowrap align-items-center nav-item text-secondary me-2"
@@ -64,7 +66,7 @@
                 'No bot selected'
               }}
             </b-nav-text>
-            <b-nav-text class="verticalCenter">
+            <b-nav-text v-if="botStore.botCount === 1" class="verticalCenter">
               {{
                 botStore.activeBotorUndefined && botStore.activeBotorUndefined.isBotOnline
                   ? 'Online'
@@ -79,22 +81,22 @@
                 <b-avatar size="2em" button>FT</b-avatar>
               </template>
               <span class="ps-3">V: {{ settingsStore.uiVersion }}</span>
-              <router-link class="dropdown-item" to="/settings">Settings</router-link>
+              <b-dropdown-item to="/settings">Settings</b-dropdown-item>
               <div class="ps-3">
                 <b-form-checkbox v-model="layoutStore.layoutLocked">Lock layout</b-form-checkbox>
               </div>
               <b-dropdown-item @click="resetDynamicLayout">Reset Layout</b-dropdown-item>
-              <router-link
+              <b-nav-item
                 v-if="botStore.botCount === 1"
                 class="dropdown-item"
                 to="/"
                 @click="clickLogout()"
-                >Sign Out</router-link
+                >Sign Out</b-nav-item
               >
             </b-nav-item-dropdown>
             <div class="d-block d-sm-none">
               <!-- Visible only on XS -->
-              <li class="nav-item text-secondary ms-2 d-sm-none d-flex justify-content-between">
+              <!-- <li class="nav-item text-secondary ms-2 d-sm-none d-flex justify-content-between">
                 <div class="d-flex">
                   <b-nav-text class="verticalCenter small me-2">
                     {{
@@ -102,22 +104,18 @@
                       'No bot selected'
                     }}
                   </b-nav-text>
-                  <b-nav-text class="verticalCenter">
-                    {{
-                      botStore.activeBotorUndefined && botStore.activeBotorUndefined.isBotOnline
-                        ? 'Online'
-                        : 'Offline'
-                    }}
-                  </b-nav-text>
                 </div>
-              </li>
-              <router-link class="nav-link navbar-nav" to="/settings">Settings</router-link>
-              <router-link
+              </li> -->
+              <b-nav-item class="py-0" to="/settings" title="Settings">
+                Settings
+#TODO_ICON<!--                <i-mdi-cog class="ms-auto" />-->
+              </b-nav-item>
+              <b-nav-item
                 v-if="botStore.botCount === 1"
                 class="nav-link navbar-nav"
                 to="/"
                 @click="clickLogout()"
-                >Sign Out</router-link
+                >Sign Out</b-nav-item
               >
             </div>
           </li>
@@ -248,9 +246,7 @@ watch(
 .navbar {
   padding: 0.2rem 0rem;
 }
-
-.router-link-active,
-.nav-link:active {
-  color: white !important;
+.nav-link {
+  padding: 0rem;
 }
 </style>

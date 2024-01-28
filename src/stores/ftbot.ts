@@ -47,6 +47,11 @@ import {
   BacktestMetadataPatch,
   BacktestResultUpdate,
   TimeSummaryOptions,
+  PerformanceEntry,
+  MixTagStats,
+  ExitStats,
+  EntryStats,
+  PairIntervalTuple,
 } from '@frequi/types';
 import axios, { AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
@@ -78,7 +83,10 @@ export function createBotSubStore(botId: string, botName: string) {
         trades: [] as ClosedTrade[],
         openTrades: [] as Trade[],
         tradeCount: 0,
-        performanceStats: [] as Performance[],
+        performanceStats: [] as PerformanceEntry[],
+        entryStats: [] as EntryStats[],
+        exitStats: [] as ExitStats[],
+        mixTagStats: [] as MixTagStats[],
         whitelist: [] as string[],
         blacklist: [] as string[],
         profit: {} as ProfitInterface,
@@ -95,13 +103,14 @@ export function createBotSubStore(botId: string, botName: string) {
         candleDataStatus: LoadingStatus.loading,
         // TODO: type me
         history: {},
-        historyStatus: LoadingStatus.loading,
+        historyStatus: LoadingStatus.not_loaded,
         strategyPlotConfig: undefined as PlotConfig | undefined,
         strategyList: [] as string[],
         freqaiModelList: [] as string[],
         exchangeList: [] as Exchange[],
         strategy: {} as StrategyResult,
         pairlist: [] as string[],
+        pairlistWithTimeframe: [] as PairIntervalTuple[],
         currentLocks: undefined as LockResponse | undefined,
         // backtesting
         backtestRunning: false,
@@ -173,7 +182,6 @@ export function createBotSubStore(botId: string, botName: string) {
           this.setIsBotOnline(true);
           return Promise.resolve();
         } catch (error) {
-          console.log('ping fail');
           this.setIsBotOnline(false);
           return Promise.reject();
         }
@@ -187,7 +195,7 @@ export function createBotSubStore(botId: string, botName: string) {
       updateBot(updatedBotInfo: Partial<BotDescriptor>) {
         userService.updateBot(updatedBotInfo);
       },
-      setAutoRefresh(newRefreshValue) {
+      setAutoRefresh(newRefreshValue: boolean) {
         this.autoRefresh = newRefreshValue;
         // TODO: Investigate this -
         // this ONLY works if ReloadControl is only visible once,otherwise it triggers twice
@@ -198,6 +206,12 @@ export function createBotSubStore(botId: string, botName: string) {
         userService.setAutoRefresh(newRefreshValue);
       },
       setIsBotOnline(isBotOnline: boolean) {
+        if (!this.isBotOnline && isBotOnline) {
+          // Bot just came online.
+          // Refresh everything
+          this.refreshRequired = true;
+          this.refreshSlow(true);
+        }
         this.isBotOnline = isBotOnline;
       },
       async refreshSlow(forceUpdate = false) {
@@ -211,7 +225,6 @@ export function createBotSubStore(botId: string, botName: string) {
             // TODO: Should be AxiosInstance
             const updates: Promise<unknown>[] = [];
             updates.push(this.getState());
-            updates.push(this.getPerformance());
             updates.push(this.getProfit());
             updates.push(this.getTrades());
             updates.push(this.getBalance());
@@ -478,6 +491,7 @@ export function createBotSubStore(botId: string, botName: string) {
           });
           // result is of type AvailablePairResult
           this.pairlist = data.pairs;
+          this.pairlistWithTimeframe = data.pair_interval;
           return Promise.resolve(data);
         } catch (error) {
           console.error(error);
@@ -486,8 +500,41 @@ export function createBotSubStore(botId: string, botName: string) {
       },
       async getPerformance() {
         try {
-          const { data } = await api.get<Performance[]>('/performance');
+          const { data } = await api.get<PerformanceEntry[]>('/performance');
           this.performanceStats = data;
+          return Promise.resolve(data);
+        } catch (error) {
+          console.error(error);
+          return Promise.reject(error);
+        }
+      },
+      async getEntryStats() {
+        // Available with >=2.34
+        try {
+          const { data } = await api.get<EntryStats[]>('/entries');
+          this.entryStats = data;
+          return Promise.resolve(data);
+        } catch (error) {
+          console.error(error);
+          return Promise.reject(error);
+        }
+      },
+      async getExitStats() {
+        // Available with >=2.34
+        try {
+          const { data } = await api.get<ExitStats[]>('/exits');
+          this.exitStats = data;
+          return Promise.resolve(data);
+        } catch (error) {
+          console.error(error);
+          return Promise.reject(error);
+        }
+      },
+      async getMixTagStats() {
+        // Available with >=2.34
+        try {
+          const { data } = await api.get<MixTagStats[]>('/mix_tags');
+          this.mixTagStats = data;
           return Promise.resolve(data);
         } catch (error) {
           console.error(error);

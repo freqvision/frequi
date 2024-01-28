@@ -42,7 +42,6 @@ import LoginModal from '@frequi/views/LoginModal.vue';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { AuthStorageWithBotId, BotDescriptor } from '@frequi/types';
 import { useSortable } from '@vueuse/integrations/useSortable';
-import { computed, ref } from 'vue';
 
 defineProps({
   small: { default: false, type: Boolean },

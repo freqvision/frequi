@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-2">
-      <label class="me-auto h3">{{ hasWeekly ? 'Period' : 'Daily' }} Breakdown</label>
+      <h3 class="me-auto d-inline">{{ hasWeekly ? 'Period' : 'Daily' }} Breakdown</h3>
       <b-button class="float-end" size="sm" @click="refreshSummary">
         <VIcon icon="mdi-refresh" />
       </b-button>
@@ -37,7 +37,6 @@ import TimePeriodChart from '@frequi/components/charts/TimePeriodChart.vue';
 import { formatPercent, formatPrice } from '@frequi/shared/formatters';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { TableField } from 'bootstrap-vue-next';
-import { computed, onMounted, ref } from 'vue';
 
 import { TimeSummaryOptions } from '@frequi/types';
 

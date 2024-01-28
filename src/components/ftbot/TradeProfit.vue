@@ -12,8 +12,6 @@ import { formatPercent, timestampms } from '@frequi/shared/formatters';
 import { Trade } from '@frequi/types';
 import ProfitPill from '@frequi/components/general/ProfitPill.vue';
 
-import { computed, PropType } from 'vue';
-
 type modes = 'default' | 'total' | 'realized';
 
 const props = defineProps({

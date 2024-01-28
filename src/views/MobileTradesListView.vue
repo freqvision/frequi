@@ -35,7 +35,7 @@
       <VCardText class="d-flex flex-column">
         <b-button
           size="sm"
-          class="align-self-start mt-1 ms-1"
+          class="align-self-start my-1 ms-1"
           @click="botStore.activeBot.setDetailTrade(null)"
         >
           <VIcon icon="mdi-arrow-left" />

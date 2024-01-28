@@ -121,8 +121,6 @@
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { ForceEnterPayload, OrderSides } from '@frequi/types';
 
-import { computed, nextTick, ref } from 'vue';
-
 const props = defineProps({
   modelValue: { required: true, default: false, type: Boolean },
   pair: { type: String, default: '' },

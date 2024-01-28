@@ -17,8 +17,8 @@
             <b-tab title="General">
               <BotStatus />
             </b-tab>
-            <b-tab title="Performance">
-              <BotPerformance class="performance-view" />
+            <b-tab title="Performance" lazy>
+              <BotPerformance />
             </b-tab>
             <b-tab title="Balance" lazy>
               <BotBalance />

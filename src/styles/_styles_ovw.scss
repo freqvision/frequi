@@ -1,5 +1,23 @@
 // global main style
 
+.dp__theme_dark, .dp__theme_light {
+    // Datepicker font size
+    --dp-font-size: 0.9rem;
+}
+
+.d-flex > * {
+    // Fix stupid flexbox bug where the flex items are overflowing the parent div if min-width is not set.
+    // mainly appeared on firefox.
+    min-width: 0px;
+}
+
+.dvh-100 {
+    // Set height to 100vh
+    height: 100vh;
+    height: 100dvh;
+}
+
+
 .logo-svg {
     background-color: #000000;
 }
@@ -56,6 +74,13 @@
         background-color: rgb(209, 231, 221) !important;
         color: rgb(10, 54, 34) !important;
     }
+}
+
+
+.router-link-active,
+.nav-link.router-link-exact-active,
+.nav-link.active {
+    color: #dedede;
 }
 
 [data-bs-theme="dark"] {
@@ -130,12 +155,6 @@
         }
     }
 
-    .nav-link.active {
-        color: $fg-color;
-        background: $bg-darker;
-        border-color: rgba(var(--v-theme-surface), 1);
-        //border-color: lighten($bg-dark, 20%);
-    }
 
     .modal-content {
         color: $fg-color;
@@ -181,7 +200,7 @@
     }
 
     .dropdown-item {
-        color: $fg-color;
+        color: $fg-color !important;
     }
 
     // Styles for searchable select

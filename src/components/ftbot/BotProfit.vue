@@ -13,7 +13,6 @@ import DateTimeTZ from '@frequi/components/general/DateTimeTZ.vue';
 
 import { ProfitInterface } from '@frequi/types';
 import { TableField, TableItem } from 'bootstrap-vue-next';
-import { computed } from 'vue';
 
 const props = defineProps({
   profit: { required: true, type: Object as () => ProfitInterface },

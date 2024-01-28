@@ -2,11 +2,11 @@
   <div class="d-flex h-100">
     <div class="flex-fill w-100 flex-column align-items-stretch d-flex h-100">
       <div class="d-flex me-0">
-        <div class="ms-2 d-flex flex-wrap flex-md-nowrap align-items-center w-auto">
-          <span class="ms-2 text-nowrap">{{ strategyName }} | {{ timeframe || '' }}</span>
+        <div class="ms-1 ms-md-2 d-flex flex-wrap flex-md-nowrap align-items-center w-auto">
+          <span class="ms-md-2 text-nowrap">{{ strategyName }} | {{ timeframe || '' }}</span>
           <VSelect
             v-model="pair"
-            class="ms-2"
+            class="ms-md-2"
             :items="availablePairs"
             style="min-width: 7em"
             density="compact"
@@ -43,7 +43,7 @@
         </div>
         <div class="ms-auto d-flex align-items-center w-auto">
           <b-form-checkbox v-model="settingsStore.useHeikinAshiCandles"
-            ><span class="text-nowrap">Heikin Ashi</span></b-form-checkbox
+            ><small class="text-nowrap">Heikin Ashi</small></b-form-checkbox
           >
 
           <div class="ms-2">
@@ -57,34 +57,36 @@
           </div>
         </div>
       </div>
-      <div class="me-1 ms-1 h-100">
-        <CandleChart
-          v-if="hasDataset"
-          :dataset="dataset"
-          :trades="trades"
-          :plot-config="plotStore.plotConfig"
-          :heikin-ashi="settingsStore.useHeikinAshiCandles"
-          :use-u-t-c="settingsStore.timezone === 'UTC'"
-          :theme="settingsStore.chartTheme"
-          :slider-position="sliderPosition"
-          :color-up="colorStore.colorUp"
-          :color-down="colorStore.colorDown"
-        >
-        </CandleChart>
-        <div v-else class="m-auto">
-          <b-spinner v-if="isLoadingDataset" label="Spinning" />
+      <div class="h-100 w-100 d-flex">
+        <div class="flex-grow-1">
+          <CandleChart
+            v-if="hasDataset"
+            :dataset="dataset"
+            :trades="trades"
+            :plot-config="plotStore.plotConfig"
+            :heikin-ashi="settingsStore.useHeikinAshiCandles"
+            :use-u-t-c="settingsStore.timezone === 'UTC'"
+            :theme="settingsStore.chartTheme"
+            :slider-position="sliderPosition"
+            :color-up="colorStore.colorUp"
+            :color-down="colorStore.colorDown"
+          >
+          </CandleChart>
+          <div v-else class="m-auto">
+            <b-spinner v-if="isLoadingDataset" label="Spinning" />
 
-          <div v-else style="font-size: 1.5rem">
-            {{ noDatasetText }}
+            <div v-else style="font-size: 1.5rem">
+              {{ noDatasetText }}
+            </div>
           </div>
         </div>
+        <transition name="fade">
+          <div v-if="!plotConfigModal" v-show="showPlotConfig" class="w-25">
+            <PlotConfigurator :columns="datasetColumns" :is-visible="showPlotConfig ?? false" />
+          </div>
+        </transition>
       </div>
     </div>
-    <transition name="fade">
-      <div v-if="!plotConfigModal" v-show="showPlotConfig" class="w-25">
-        <PlotConfigurator :columns="datasetColumns" :is-visible="showPlotConfig ?? false" />
-      </div>
-    </transition>
     <b-modal
       v-if="plotConfigModal"
       id="plotConfiguratorModal"
@@ -157,15 +159,14 @@ const noDatasetText = computed((): string => {
     : botStore.activeBot.candleDataStatus;
 
   switch (status) {
+    case LoadingStatus.not_loaded:
+      return 'Not loaded yet.';
     case LoadingStatus.loading:
       return 'Loading...';
-
     case LoadingStatus.success:
       return 'No data available';
-
     case LoadingStatus.error:
       return 'Failed to load data';
-
     default:
       return 'Unknown';
   }

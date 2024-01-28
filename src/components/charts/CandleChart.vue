@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-grow-1 chart-wrapper">
+  <div class="chart-wrapper">
     <e-charts v-if="hasData" ref="candleChart" :theme="theme" autoresize manual-update />
   </div>
 </template>
@@ -21,7 +21,7 @@ import {
   Trade,
 } from '@frequi/types';
 import { format } from 'date-fns-tz';
-import { computed, onMounted, ref, watch } from 'vue';
+
 import ECharts from 'vue-echarts';
 
 import { calculateDiff, getDiffColumnsFromPlotConfig } from '@frequi/shared/charts/areaPlotDataset';
@@ -44,6 +44,7 @@ import {
   // MarkAreaComponent,
   MarkLineComponent,
   // MarkPointComponent,
+  GraphicComponent,
 } from 'echarts/components';
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -70,6 +71,7 @@ use([
   LineChart,
   ScatterChart,
   CanvasRenderer,
+  GraphicComponent,
 ]);
 
 // Chart default options
@@ -106,7 +108,7 @@ const shortEntrySignalColor = '#00ff26';
 const sellSignalColor = '#faba25';
 const shortexitSignalColor = '#faba25';
 
-const candleChart = ref<typeof ECharts>();
+const candleChart = ref<InstanceType<typeof ECharts>>();
 const chartOptions = ref<EChartsOption>({});
 
 const strategy = computed(() => {
@@ -137,6 +139,12 @@ const diffCols = computed(() => {
   return getDiffColumnsFromPlotConfig(props.plotConfig);
 });
 
+usePercentageTool(
+  candleChart,
+  toRef(() => props.theme),
+  toRef(() => props.dataset.timeframe_ms),
+);
+console.log(candleChart);
 function updateChart(initial = false) {
   if (!hasData.value) {
     return;
@@ -489,13 +497,13 @@ function updateChart(initial = false) {
   // console.log('chartOptions', chartOptions.value);
   candleChart.value?.setOption(chartOptions.value, {
     replaceMerge: ['series', 'grid', 'yAxis', 'xAxis', 'legend'],
-    noMerge: !initial,
+    notMerge: !initial,
   });
 }
 
 function initializeChartOptions() {
   // Ensure we start empty.
-  candleChart.value?.setOption({}, { noMerge: true });
+  candleChart.value?.setOption({}, { notMerge: true });
 
   chartOptions.value = {
     title: [
@@ -578,6 +586,12 @@ function initializeChartOptions() {
     yAxis: [
       {
         scale: true,
+        max: (value) => {
+          return value.max + (value.max - value.min) * 0.02;
+        },
+        min: (value) => {
+          return value.min - (value.max - value.min) * 0.04;
+        },
       },
       {
         scale: true,
@@ -699,6 +713,13 @@ watch(
 watch(
   () => props.sliderPosition,
   () => updateSliderPosition(),
+);
+
+watch(
+  () => props.theme,
+  () => {
+    initializeChartOptions();
+  },
 );
 </script>
 

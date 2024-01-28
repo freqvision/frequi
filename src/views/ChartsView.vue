@@ -7,12 +7,12 @@
         <!-- <b-form-checkbox v-model="historicView">HistoricData</b-form-checkbox> -->
         <!-- </div> -->
         <div v-if="botStore.activeBot.isWebserverMode" class="mx-md-3 mt-2">
-          <div class="d-flex flex-wrap">
-            <div class="col-md-3 text-start">
+          <div class="d-flex flex-wrap mx-1 gap-1 gap-md-2">
+            <div class="col-12 col-md-3 text-start me-md-1">
               <span>Strategy</span>
               <StrategySelect v-model="strategy" class="mt-1"></StrategySelect>
             </div>
-            <div class="col-md-3 text-start">
+            <div class="col-12 col-md-3 text-start">
               <span>Timeframe</span>
               <TimeframeSelect v-model="selectedTimeframe" class="mt-1" />
             </div>
@@ -20,17 +20,11 @@
           </div>
         </div>
 
-        <div class="mx-2 mt-2 pb-1 h-100">
+        <div class="mx-md-2 mt-2 pb-1 h-100">
           <CandleChartContainer
-            :available-pairs="
-              botStore.activeBot.isWebserverMode
-                ? botStore.activeBot.pairlist
-                : botStore.activeBot.whitelist
-            "
+            :available-pairs="availablePairs"
             :historic-view="botStore.activeBot.isWebserverMode"
-            :timeframe="
-              botStore.activeBot.isWebserverMode ? selectedTimeframe : botStore.activeBot.timeframe
-            "
+            :timeframe="finalTimeframe"
             :trades="botStore.activeBot.trades"
             :timerange="botStore.activeBot.isWebserverMode ? timerange : ''"
             :strategy="botStore.activeBot.isWebserverMode ? strategy : ''"
@@ -55,6 +49,28 @@ const botStore = useBotStore();
 const strategy = ref('');
 const timerange = ref('');
 const selectedTimeframe = ref('');
+
+const finalTimeframe = computed<string>(() => {
+  return botStore.activeBot.isWebserverMode
+    ? selectedTimeframe.value || botStore.activeBot.strategy.timeframe || ''
+    : botStore.activeBot.timeframe;
+});
+
+const availablePairs = computed<string[]>(() => {
+  if (botStore.activeBot.isWebserverMode) {
+    if (finalTimeframe.value && finalTimeframe.value !== '') {
+      const tf = finalTimeframe.value;
+      return botStore.activeBot.pairlistWithTimeframe
+        .filter(([pair, timeframe]) => {
+          console.log(pair, timeframe, tf);
+          return timeframe === tf;
+        })
+        .map(([pair]) => pair);
+    }
+    return botStore.activeBot.pairlist;
+  }
+  return botStore.activeBot.whitelist;
+});
 
 onMounted(() => {
   if (botStore.activeBot.isWebserverMode) {

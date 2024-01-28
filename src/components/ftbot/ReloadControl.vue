@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center ms-2">
     <VCheckbox
       v-model="autoRefreshLoc"
-      class="ms-auto float-end my-auto mt-1"
+      class="float-end my-auto mt-1"
       title="AutoRefresh"
     ></VCheckbox>
     <VBtn

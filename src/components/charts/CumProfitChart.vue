@@ -29,7 +29,7 @@ import {
 } from '@frequi/types';
 import { watchThrottled } from '@vueuse/core';
 import { computed, onMounted, ref, watch } from 'vue';
-import { formatPrice } from '@frequi/shared/formatters';
+import { formatPrice, timestampToDateString } from '@frequi/shared/formatters';
 import { useColorStore } from '@frequi/stores/colors';
 
 use([
@@ -59,7 +59,7 @@ const settingsStore = useSettingsStore();
 const colorStore = useColorStore();
 // const botList = ref<string[]>([]);
 
-const chart = ref<typeof ECharts>();
+const chart = ref<InstanceType<typeof ECharts>>();
 
 const openProfit = computed<number>(() => {
   return props.openTrades.reduce(
@@ -196,12 +196,12 @@ function updateChart(initial = false) {
   const chartOptionsLoc = generateChart(initial);
   chart.value?.setOption(chartOptionsLoc, {
     replaceMerge: ['series', 'dataset'],
-    noMerge: !initial,
+    notMerge: !initial,
   });
 }
 
 function initializeChart() {
-  chart.value?.setOption({}, { noMerge: true });
+  chart.value?.setOption({}, { notMerge: true });
   const chartOptionsLoc: EChartsOption = {
     title: {
       text: 'Cumulative Profit',
@@ -216,7 +216,9 @@ function initializeChart() {
         const profitText = currentProfit
           ? `Projected profit (incl. unrealized): ${formatPrice(currentProfit, 3)}`
           : `Profit: ${formatPrice(profit, 3)}`;
-        return profitText;
+        return `${timestampToDateString(params[1].data.date)}<br />${
+          params[1].marker
+        }${profitText}`;
       },
       axisPointer: {
         type: 'line',
@@ -271,7 +273,7 @@ function initializeChart() {
   chartOptionsLoc.series = chartOptionsLoc1.series;
   chartOptionsLoc.dataset = chartOptionsLoc1.dataset;
 
-  chart.value?.setOption(chartOptionsLoc, { noMerge: true });
+  chart.value?.setOption(chartOptionsLoc, { notMerge: true });
   updateChart(true);
 }
 

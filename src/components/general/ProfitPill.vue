@@ -24,8 +24,6 @@ import { formatPercent, formatPrice, formatPriceCurrency } from '@frequi/shared/
 
 import ProfitSymbol from '@frequi/components/general/ProfitSymbol.vue';
 
-import { computed } from 'vue';
-
 const props = defineProps({
   profitRatio: { required: false, default: undefined, type: Number },
   profitAbs: { required: false, default: undefined, type: Number },

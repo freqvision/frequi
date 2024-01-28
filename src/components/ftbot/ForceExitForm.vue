@@ -25,7 +25,6 @@
             v-model="amount"
             type="number"
             step="0.000001"
-            @keydown.enter="handleEntry"
           ></b-form-input>
           <b-form-input
             id="stake-input"
@@ -34,7 +33,6 @@
             step="0.000001"
             min="0"
             :max="trade.amount"
-            @keydown.enter="handleEntry"
           ></b-form-input>
         </b-form-group>
 
@@ -61,8 +59,6 @@
 <script setup lang="ts">
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { ForceSellPayload, Trade } from '@frequi/types';
-
-import { ref, computed } from 'vue';
 
 const props = defineProps({
   trade: {
@@ -93,7 +89,7 @@ const model = computed({
   },
 });
 
-const handleSubmit = () => {
+function handleSubmit() {
   // Exit when the form isn't valid
   if (!checkFormValidity()) {
     return;
@@ -109,17 +105,18 @@ const handleSubmit = () => {
   }
   botStore.activeBot.forceexit(payload);
   model.value = false;
-};
-const resetForm = () => {
+}
+
+function resetForm() {
   amount.value = props.trade.amount;
   ordertype.value =
     botStore.activeBot.botState?.order_types?.force_exit ||
     botStore.activeBot.botState?.order_types?.exit ||
     'limit';
-};
+}
 
-const handleEntry = () => {
+function handleEntry() {
   // Trigger submit handler
   handleSubmit();
-};
+}
 </script>

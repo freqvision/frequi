@@ -32,6 +32,9 @@
         v-if="item.profitOpen && item.botId != 'Summary'"
         :profit-ratio="(item as unknown as ComparisonTableItems).profitOpenRatio"
         :profit-abs="(item as unknown as ComparisonTableItems).profitOpen"
+        :profit-desc="`Total Profit (Open and realized) ${formatPercent(
+          (item as unknown as ComparisonTableItems).profitOpenRatio ?? 0.0,
+        )}`"
         :stake-currency="(item as unknown as ComparisonTableItems).stakeCurrency"
       />
     </template>
@@ -70,7 +73,7 @@
 
 <script setup lang="ts">
 import ProfitPill from '@frequi/components/general/ProfitPill.vue';
-import { formatPrice } from '@frequi/shared/formatters';
+import { formatPrice, formatPercent } from '@frequi/shared/formatters';
 import { computed } from 'vue';
 import { useBotStore } from '@frequi/stores/ftbotwrapper';
 import { ProfitInterface, ComparisonTableItems } from '@frequi/types';
